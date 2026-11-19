@@ -30,6 +30,15 @@ export function ButtonRow({ children }: { children: ReactNode }) {
   return <div className={styles.buttons}>{children}</div>
 }
 
-export function PlotCanvas({ canvasRef, label }: { canvasRef: Ref<HTMLCanvasElement>; label: string }) {
-  return <canvas ref={canvasRef} className={styles.canvas} role="img" aria-label={label} />
+export function PlotCanvas({
+  canvasRef,
+  label,
+  height,
+}: {
+  canvasRef: Ref<HTMLCanvasElement>
+  label: string
+  /** px, default 280 */
+  height?: number
+}) {
+  return <canvas ref={canvasRef} className={styles.canvas} style={height ? { height } : undefined} role="img" aria-label={label} />
 }

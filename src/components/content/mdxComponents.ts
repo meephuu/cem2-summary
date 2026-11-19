@@ -1,6 +1,9 @@
 import type { MDXComponents } from 'mdx/types'
 import { DistributionRelations } from '../diagrams/DistributionRelations'
+import { CLTSimulator } from '../interactive/CLTSimulator'
+import { ConfidenceIntervalSim } from '../interactive/ConfidenceIntervalSim'
 import { DistributionExplorer } from '../interactive/DistributionExplorer'
+import { LLNSimulator } from '../interactive/LLNSimulator'
 import { NormalArea } from '../interactive/NormalArea'
 import { Callout, Def, Example, Tip, Warn } from './Callout'
 import { Compare, CompareItem } from './Compare'
@@ -22,4 +25,7 @@ export const mdxComponents: MDXComponents = {
   DistributionExplorer,
   NormalArea,
   DistributionRelations,
+  LLNSimulator,
+  CLTSimulator,
+  ConfidenceIntervalSim,
 }

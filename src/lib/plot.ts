@@ -42,6 +42,8 @@ export interface FrameOptions {
   xhi: number
   ymax: number
   xTicks?: number[]
+  /** custom text for x tick labels (e.g. for a log axis) */
+  xLabel?: (v: number) => string
   /** reserve space for a right-hand 0–1 axis */
   rightAxis?: boolean
 }
@@ -75,7 +77,7 @@ export function drawFrame(g: CanvasRenderingContext2D, w: number, h: number, o: 
   g.fillStyle = cssVar('--muted')
   g.textAlign = 'center'
   g.textBaseline = 'top'
-  for (const v of o.xTicks ?? niceTicks(o.xlo, o.xhi, 8)) g.fillText(fmt(v), X(v), h - B + 6)
+  for (const v of o.xTicks ?? niceTicks(o.xlo, o.xhi, 8)) g.fillText((o.xLabel ?? fmt)(v), X(v), h - B + 6)
 
   g.strokeStyle = cssVar('--muted')
   g.beginPath()

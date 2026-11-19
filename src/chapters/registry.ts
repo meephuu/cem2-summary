@@ -38,6 +38,7 @@ export const CHAPTERS: Chapter[] = [
     subtitle: 'LLN & CLT',
     source: '01A_LLN_CLT',
     blurb: 'LLN, CLT, confidence interval',
+    Content: lazy(() => import('./01-lln-clt/content.mdx')),
   },
   {
     id: 'estimation',
