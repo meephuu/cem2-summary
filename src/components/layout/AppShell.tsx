@@ -1,0 +1,47 @@
+import { useState, type ReactNode } from 'react'
+import type { Chapter } from '../../chapters/registry'
+import type { Heading } from '../../lib/hooks'
+import { ChapterMenu } from './ChapterMenu'
+import { ReadingProgress } from './ReadingProgress'
+import { TableOfContents } from './TableOfContents'
+import styles from './AppShell.module.css'
+
+interface Props {
+  chapter: Chapter
+  headings: Heading[]
+  children: ReactNode
+}
+
+/** Page layout: sidebar (chapter menu + TOC) on desktop, top bar with a drawer on mobile. */
+export function AppShell({ chapter, headings, children }: Props) {
+  const [open, setOpen] = useState(false)
+  const close = () => setOpen(false)
+
+  const sidebar = (
+    <>
+      <div className={styles.brand}>สรุปสถิติ CEM II</div>
+      <div className={styles.course}>2110203 COMP ENG MATH II · ไฟนอล</div>
+      <ChapterMenu currentId={chapter.id} onPick={close} />
+      <TableOfContents headings={headings} onPick={close} />
+    </>
+  )
+
+  return (
+    <>
+      <ReadingProgress />
+      <div className={styles.topbar} data-topbar>
+        <button className={styles.menuButton} onClick={() => setOpen(true)} aria-label="เปิดเมนู">
+          ☰
+        </button>
+        <span className={styles.topTitle}>
+          บทที่ {chapter.no} · {chapter.subtitle}
+        </span>
+      </div>
+      {open && <div className={styles.scrim} onClick={close} />}
+      <div className={styles.layout}>
+        <aside className={`${styles.sidebar} ${open ? styles.open : ''}`}>{sidebar}</aside>
+        <main className={styles.main}>{children}</main>
+      </div>
+    </>
+  )
+}

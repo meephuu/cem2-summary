@@ -1,0 +1,31 @@
+.figure {
+  margin: 12px 0;
+}
+.svg {
+  width: 100%;
+  height: auto;
+}
+.node {
+  fill: var(--surface);
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+.nodeText {
+  fill: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+.label {
+  fill: var(--muted);
+  font-size: 12.5px;
+  text-anchor: middle;
+}
+.edge {
+  stroke: var(--muted);
+  stroke-width: 1.5;
+  fill: none;
+}
+.head {
+  fill: var(--muted);
+}
