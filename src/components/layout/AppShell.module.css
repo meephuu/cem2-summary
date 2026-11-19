@@ -14,15 +14,18 @@
   overflow: auto;
   padding: 32px 4px 24px 0;
 }
+.brandRow {
+  margin: 0 0 20px 10px;
+}
 .brand {
   font-weight: 700;
   font-size: 16px;
-  margin-left: 10px;
+  line-height: 1.3;
 }
 .course {
   font-size: 12.5px;
   color: var(--muted);
-  margin: 0 0 20px 10px;
+  line-height: 1.4;
 }
 .main {
   max-width: var(--content-w);

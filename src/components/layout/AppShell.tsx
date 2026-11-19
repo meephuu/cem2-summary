@@ -19,8 +19,10 @@ export function AppShell({ chapter, headings, children }: Props) {
 
   const sidebar = (
     <>
-      <div className={styles.brand}>สรุปสถิติ CEM II</div>
-      <div className={styles.course}>2110203 COMP ENG MATH II · ไฟนอล</div>
+      <div className={styles.brandRow}>
+        <div className={styles.brand}>สรุปสถิติ CEM II</div>
+        <div className={styles.course}>2110203 COMP ENG MATH II · ไฟนอล</div>
+      </div>
       <ChapterMenu currentId={chapter.id} onPick={close} />
       <TableOfContents headings={headings} onPick={close} />
     </>
