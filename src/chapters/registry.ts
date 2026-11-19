@@ -47,6 +47,7 @@ export const CHAPTERS: Chapter[] = [
     subtitle: 'Sampling & Estimation',
     source: '01B_Estimation',
     blurb: 'Inverse transform sampling, MLE, MAP, Bayesian vs Frequentist',
+    Content: lazy(() => import('./02-estimation/content.mdx')),
   },
   {
     id: 'testing',

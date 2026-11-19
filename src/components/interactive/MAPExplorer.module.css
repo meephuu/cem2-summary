@@ -1,0 +1,54 @@
+.wrap {
+  overflow-x: auto;
+  margin: 8px 0;
+}
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.table th,
+.table td {
+  border-bottom: 1px solid var(--border);
+  padding: 6px 8px;
+  text-align: left;
+  white-space: nowrap;
+}
+.table th {
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 13px;
+}
+.best td {
+  background: var(--accent-soft);
+}
+.tag {
+  margin-left: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--surface);
+}
+.mle {
+  background: var(--warn);
+}
+.barCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+}
+.bar {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--accent);
+  max-width: 90px;
+  flex: none;
+}
+.muted {
+  background: var(--muted);
+  opacity: 0.6;
+}

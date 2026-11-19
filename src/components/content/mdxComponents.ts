@@ -3,7 +3,10 @@ import { DistributionRelations } from '../diagrams/DistributionRelations'
 import { CLTSimulator } from '../interactive/CLTSimulator'
 import { ConfidenceIntervalSim } from '../interactive/ConfidenceIntervalSim'
 import { DistributionExplorer } from '../interactive/DistributionExplorer'
+import { InverseTransformDemo } from '../interactive/InverseTransformDemo'
+import { LikelihoodExplorer } from '../interactive/LikelihoodExplorer'
 import { LLNSimulator } from '../interactive/LLNSimulator'
+import { MAPExplorer } from '../interactive/MAPExplorer'
 import { NormalArea } from '../interactive/NormalArea'
 import { Callout, Def, Example, Tip, Warn } from './Callout'
 import { Compare, CompareItem } from './Compare'
@@ -28,4 +31,7 @@ export const mdxComponents: MDXComponents = {
   LLNSimulator,
   CLTSimulator,
   ConfidenceIntervalSim,
+  InverseTransformDemo,
+  LikelihoodExplorer,
+  MAPExplorer,
 }
