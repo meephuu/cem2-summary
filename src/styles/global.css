@@ -48,3 +48,42 @@ code {
   font-size: 14px;
   color: var(--muted);
 }
+
+/* ---------- Scrollbars: thin, theme-coloured, hidden until you scroll ----------
+   Elements with .autohide-scroll keep their scrollbar transparent until the
+   useAutoHideScrollbar hook adds .is-scrolling (while scrolling, or when the
+   pointer is right at the scrollbar edge so it can still be dragged). */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-thumb) transparent;
+}
+.autohide-scroll {
+  scrollbar-color: transparent transparent;
+}
+.autohide-scroll.is-scrolling {
+  scrollbar-color: var(--scroll-thumb) transparent;
+}
+.autohide-scroll.is-scrolling:hover {
+  scrollbar-color: var(--scroll-thumb-hover) transparent;
+}
+
+/* Fallback for browsers without scrollbar-color (older Safari) */
+@supports not (scrollbar-color: auto) {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scroll-thumb);
+    border-radius: 999px;
+  }
+  .autohide-scroll::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+  .autohide-scroll.is-scrolling::-webkit-scrollbar-thumb {
+    background: var(--scroll-thumb);
+  }
+}

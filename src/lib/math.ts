@@ -116,3 +116,44 @@ export function invertCdf(cdf: (x: number) => number, p: number, lo = -60, hi = 
   }
   return (lo + hi) / 2
 }
+
+/** Regularized lower incomplete gamma P(a, x) (Numerical Recipes gser/gcf). */
+export function gammaIncLower(a: number, x: number): number {
+  if (x <= 0) return 0
+  const gln = logGamma(a)
+  if (x < a + 1) {
+    let ap = a
+    let sum = 1 / a
+    let del = sum
+    for (let n = 0; n < 500; n++) {
+      ap += 1
+      del *= x / ap
+      sum += del
+      if (Math.abs(del) < Math.abs(sum) * 1e-14) break
+    }
+    return sum * Math.exp(-x + a * Math.log(x) - gln)
+  }
+  const TINY = 1e-300
+  let b = x + 1 - a
+  let c = 1 / TINY
+  let d = 1 / b
+  let h = d
+  for (let i = 1; i < 500; i++) {
+    const an = -i * (i - a)
+    b += 2
+    d = an * d + b
+    if (Math.abs(d) < TINY) d = TINY
+    c = b + an / c
+    if (Math.abs(c) < TINY) c = TINY
+    d = 1 / d
+    const del = d * c
+    h *= del
+    if (Math.abs(del - 1) < 1e-14) break
+  }
+  return 1 - Math.exp(-x + a * Math.log(x) - gln) * h
+}
+
+/** Chi-squared CDF with k degrees of freedom. */
+export function chi2Cdf(x: number, k: number): number {
+  return gammaIncLower(k / 2, x / 2)
+}

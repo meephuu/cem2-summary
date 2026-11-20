@@ -119,3 +119,53 @@ export function useScrollProgress(): number {
   }, [])
   return p
 }
+
+/* ---------------- Auto-hiding scrollbar ---------------- */
+
+const EDGE_PX = 16
+const LINGER_MS = 900
+
+/**
+ * Adds `autohide-scroll` to the element (or <html> when `target` is 'document')
+ * and toggles `is-scrolling` while it scrolls, or while the pointer sits on the
+ * scrollbar edge so the thumb can still be grabbed.
+ */
+export function useAutoHideScrollbar(target: RefObject<HTMLElement | null> | 'document') {
+  useEffect(() => {
+    const doc = target === 'document'
+    const el = doc ? document.documentElement : target.current
+    if (!el) return
+    const scroller: HTMLElement | Window = doc ? window : el
+    el.classList.add('autohide-scroll')
+    let timer = 0
+    let nearEdge = false
+    const show = () => el.classList.add('is-scrolling')
+    const hideLater = () => {
+      window.clearTimeout(timer)
+      timer = window.setTimeout(() => {
+        if (!nearEdge) el.classList.remove('is-scrolling')
+      }, LINGER_MS)
+    }
+    const onScroll = () => {
+      show()
+      hideLater()
+    }
+    const onMove = (e: MouseEvent) => {
+      const right = doc ? window.innerWidth : el.getBoundingClientRect().right
+      const inside = doc || (e.target instanceof Node && el.contains(e.target))
+      const near = inside && right - e.clientX <= EDGE_PX && right - e.clientX >= 0
+      if (near === nearEdge) return
+      nearEdge = near
+      if (near) show()
+      else hideLater()
+    }
+    scroller.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('mousemove', onMove, { passive: true })
+    return () => {
+      window.clearTimeout(timer)
+      scroller.removeEventListener('scroll', onScroll)
+      window.removeEventListener('mousemove', onMove)
+      el.classList.remove('autohide-scroll', 'is-scrolling')
+    }
+  }, [target])
+}

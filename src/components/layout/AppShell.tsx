@@ -1,7 +1,8 @@
-import { useState, type ReactNode } from 'react'
+import { useRef, useState, type ReactNode } from 'react'
 import type { Chapter } from '../../chapters/registry'
-import type { Heading } from '../../lib/hooks'
+import { useAutoHideScrollbar, type Heading } from '../../lib/hooks'
 import { ChapterMenu } from './ChapterMenu'
+import { DistTablesPanel } from './DistTablesPanel'
 import { ReadingProgress } from './ReadingProgress'
 import { TableOfContents } from './TableOfContents'
 import styles from './AppShell.module.css'
@@ -16,6 +17,9 @@ interface Props {
 export function AppShell({ chapter, headings, children }: Props) {
   const [open, setOpen] = useState(false)
   const close = () => setOpen(false)
+  const sidebarRef = useRef<HTMLElement>(null)
+  useAutoHideScrollbar(sidebarRef)
+  useAutoHideScrollbar('document')
 
   const sidebar = (
     <>
@@ -41,9 +45,10 @@ export function AppShell({ chapter, headings, children }: Props) {
       </div>
       {open && <div className={styles.scrim} onClick={close} />}
       <div className={styles.layout}>
-        <aside className={`${styles.sidebar} ${open ? styles.open : ''}`}>{sidebar}</aside>
+        <aside ref={sidebarRef} className={`${styles.sidebar} ${open ? styles.open : ''}`}>{sidebar}</aside>
         <main className={styles.main}>{children}</main>
       </div>
+      <DistTablesPanel />
     </>
   )
 }
