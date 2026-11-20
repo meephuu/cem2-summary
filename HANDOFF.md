@@ -19,14 +19,17 @@ Probability recap, LLN/CLT, Sampling & Estimation, Hypothesis Testing, A/B Testi
 | 0 | `probability` | Probability Recap | 00_STATS_PROB_REVIEW | ✅ |
 | 1 | `lln-clt` | LLN & CLT | 01A_LLN_CLT | ✅ |
 | 2 | `estimation` | Sampling & Estimation | 01B_Estimation | ✅ |
-| 3A | (ใหม่) | Hypothesis Testing: หลักการ + การคำนวณ | 02_TESTING หน้า 1–33, 75–81 | ⏳ ทำต่อ |
-| 3B | (ใหม่) | Hypothesis Testing: กับดัก, multiple testing, เลือก test | 02_TESTING หน้า 34–74 | ⏳ |
-| 4→5 | `ab-testing` | A/B Testing | L03_ABtest | ⏳ (เลื่อนเป็นบทที่ 5 หลังแบ่งบท 3) |
+| 3 | `testing` | Hypothesis Testing (รวม 3A+3B เป็นบทเดียวตามที่เจ้าของสั่ง) | 02_TESTING ทั้ง 82 หน้า | ✅ |
+| 4 | `ab-testing` | A/B Testing | L03_ABtest | ⏳ ทำต่อ |
 
-### แผนบท 3A (ตกลงกับเจ้าของแล้ว)
+### บท 3 ทำแล้ว (เดิมวางแผนแยก 3A/3B ด้านล่าง เจ้าของสั่งให้รวมเป็นบทใหญ่บทเดียว)
+widget บท 3: PValueExplorer, RejectionPowerExplorer, BaseRateGrid · `lib/math.ts` มี tCdf/tPdf/betaInc/logGamma/invertCdf แล้ว
+ข้อสังเกต: ตาราง t ท้ายข้อสอบ 2024 หัวคอลัมน์ที่ 3 เป็นต้นไปเลื่อน (ใส่ Warn ไว้ในบท 3 แล้ว)
+
+#### เนื้อหาบท 3 ส่วนแรก
 ทำไมต้องทดสอบ (ยา COVID A/B) · H₀/Hₐ · องค์ประกอบ NHST (test statistic, null distribution, rejection region, critical value, α, p-value, one/two-sided) · Type I/II, power · ขั้นตอนออกแบบ 6 ขั้น · Z-test · one-sample t · two-sample t (pooled, df n+m−2, ควิซ GCC vs Clang) · paired t · two-proportion z (ตัวอย่างยา p=0.396 / 0.102, เงื่อนไข ≥5) · เลือก α ตามต้นทุน (ช็อกโกแลต 0.1, ลายนิ้วมือ 0.01) · Cohen's d · ตัวอย่าง Instagram subtitles · Practice 1–3 (ส่วนสูง t=5.011, ข้าว z=1.988, ร้านอาหาร t=0.685)
 
-### แผนบท 3B
+#### เนื้อหาบท 3 ส่วนหลัง
 p ใหญ่ = สรุปไม่ได้ (4 สาเหตุ) · misconceptions + edge cases (practical vs statistical significance) · p-hacking (xkcd) · base rate fallacy (ยา 100 ตัว) · low power · 2 fallacies · Bonferroni / Benjamini-Hochberg (+ตัวอย่าง 0.003…0.053) · χ² GoF, McNemar, Wilcoxon, Fisher transformation, Shapiro-Wilk/Levene, ANOVA/Welch · เลือก test (3 คำถาม, flowchart, Which test? 1–3) · causation, confounder, RCT · good practice
 
 ### ข้อสอบเน้นอะไร (จาก past exam 2024)
@@ -36,6 +39,7 @@ A/B test design เป็นข้อเขียน 10 คะแนน · MLE 1
 
 ## สไตล์การเขียน (เจ้าของชอบแบบนี้ ใช้เหมือนเดิมทุกบท)
 
+- ดูตัวอย่างจากบทเก่าเสมอ เอามาทำสไตล์เดียวกัน
 - ภาษาไทย อ่านง่าย คนไม่เคยเรียนก็เข้าใจ อธิบายสัญชาตญาณก่อนสูตร
 - ทุกหัวข้อ `##` = หนึ่งส่วนใหญ่ (มีเลขและสารบัญอัตโนมัติ), ใช้ `###` แบ่งย่อย ห้ามใส่เลขเอง
 - ใช้กล่อง: `<Def>` นิยาม · `<Example>` ตัวอย่าง (วิธีทำซ่อนใน `<Solution>`) · `<Warn>` จุดที่คนพลาด · `<Tip>` ทิปสอบ/สูตรสำเร็จ
