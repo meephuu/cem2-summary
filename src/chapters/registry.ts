@@ -25,7 +25,7 @@ export const CHAPTERS: Chapter[] = [
   {
     id: 'probability',
     no: 0,
-    title: 'ทบทวนความน่าจะเป็น',
+    title: 'Probability Recap',
     subtitle: 'Probability Recap',
     source: '00_STATS_PROB_REVIEW',
     blurb: 'Bayes, pmf/pdf/cdf, E และ Var, Covariance, การแจกแจงยอดนิยม, Normal',
@@ -34,7 +34,7 @@ export const CHAPTERS: Chapter[] = [
   {
     id: 'lln-clt',
     no: 1,
-    title: 'กฎจำนวนมากและทฤษฎีบทลิมิตกลาง',
+    title: 'Law of Large Numbers & Central Limit Theorem',
     subtitle: 'LLN & CLT',
     source: '01A_LLN_CLT',
     blurb: 'LLN, CLT, confidence interval',
@@ -43,7 +43,7 @@ export const CHAPTERS: Chapter[] = [
   {
     id: 'estimation',
     no: 2,
-    title: 'การสุ่มตัวอย่างและการประมาณค่า',
+    title: 'Sampling & Estimation',
     subtitle: 'Sampling & Estimation',
     source: '01B_Estimation',
     blurb: 'Inverse transform sampling, MLE, MAP, Bayesian vs Frequentist',
@@ -52,7 +52,7 @@ export const CHAPTERS: Chapter[] = [
   {
     id: 'testing',
     no: 3,
-    title: 'การทดสอบสมมติฐาน',
+    title: 'Hypothesis Testing',
     subtitle: 'Hypothesis Testing',
     source: '02_TESTING',
     blurb: 'NHST, z/t-test, power, p-value, multiple testing',
