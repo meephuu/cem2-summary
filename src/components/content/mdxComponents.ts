@@ -9,8 +9,10 @@ import { LikelihoodExplorer } from '../interactive/LikelihoodExplorer'
 import { LLNSimulator } from '../interactive/LLNSimulator'
 import { MAPExplorer } from '../interactive/MAPExplorer'
 import { NormalArea } from '../interactive/NormalArea'
+import { PeekingSimulator } from '../interactive/PeekingSimulator'
 import { PValueExplorer } from '../interactive/PValueExplorer'
 import { RejectionPowerExplorer } from '../interactive/RejectionPowerExplorer'
+import { SampleSizeCalculator } from '../interactive/SampleSizeCalculator'
 import { Callout, Def, Example, Tip, Warn } from './Callout'
 import { Compare, CompareItem } from './Compare'
 import { Solution } from './Solution'
@@ -40,4 +42,6 @@ export const mdxComponents: MDXComponents = {
   RejectionPowerExplorer,
   PValueExplorer,
   BaseRateGrid,
+  SampleSizeCalculator,
+  PeekingSimulator,
 }

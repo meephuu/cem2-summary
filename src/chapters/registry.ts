@@ -64,7 +64,8 @@ export const CHAPTERS: Chapter[] = [
     title: 'A/B Testing',
     subtitle: 'A/B Testing in the Wild',
     source: 'L03_ABtest',
-    blurb: 'Metric, การแบ่งกลุ่ม, stopping criteria, peeking, sanity check',
+    blurb: 'Metric, การแบ่งกลุ่ม, MDE และขนาดตัวอย่าง, peeking, sanity check',
+    Content: lazy(() => import('./04-ab-testing/content.mdx')),
   },
 ]
 
