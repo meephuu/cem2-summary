@@ -20,7 +20,7 @@
 | `00_STATS_PROB_REVIEW_….pdf` | Probability recap | 0 |
 | `01A_LLN_CLT_….pdf` | LLN, CLT, confidence interval | 1 |
 | `01B_Estimation_….pdf` | Inverse transform sampling, MLE, MAP, Bayesian vs Frequentist | 2 |
-| `02_TESTING_….pdf` (82 หน้า) | Hypothesis testing ทั้งหมด | 3A, 3B |
+| `02_TESTING_….pdf` (82 หน้า) | Hypothesis testing ทั้งหมด | 3 |
 | `L03_ABtest-….pdf` | A/B testing in the wild | 4 (A/B) |
 | `L04_MultiArm_bandits-….pdf` | Multi-armed bandits | **ไม่ออกไฟนอล** ไม่ต้องทำ |
 | `past-exam-2024.pdf` | ข้อสอบไฟนอลปี 2024 (ข้อความ extract เริ่มหน้า 2/5) | ดูว่าข้อสอบเน้นอะไร, ทำทิป/แบบฝึกหัด |

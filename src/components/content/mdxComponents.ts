@@ -1,5 +1,6 @@
 import type { MDXComponents } from 'mdx/types'
 import { DistributionRelations } from '../diagrams/DistributionRelations'
+import { BaseRateGrid } from '../interactive/BaseRateGrid'
 import { CLTSimulator } from '../interactive/CLTSimulator'
 import { ConfidenceIntervalSim } from '../interactive/ConfidenceIntervalSim'
 import { DistributionExplorer } from '../interactive/DistributionExplorer'
@@ -8,6 +9,8 @@ import { LikelihoodExplorer } from '../interactive/LikelihoodExplorer'
 import { LLNSimulator } from '../interactive/LLNSimulator'
 import { MAPExplorer } from '../interactive/MAPExplorer'
 import { NormalArea } from '../interactive/NormalArea'
+import { PValueExplorer } from '../interactive/PValueExplorer'
+import { RejectionPowerExplorer } from '../interactive/RejectionPowerExplorer'
 import { Callout, Def, Example, Tip, Warn } from './Callout'
 import { Compare, CompareItem } from './Compare'
 import { Solution } from './Solution'
@@ -34,4 +37,7 @@ export const mdxComponents: MDXComponents = {
   InverseTransformDemo,
   LikelihoodExplorer,
   MAPExplorer,
+  RejectionPowerExplorer,
+  PValueExplorer,
+  BaseRateGrid,
 }

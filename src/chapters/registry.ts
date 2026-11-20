@@ -55,7 +55,8 @@ export const CHAPTERS: Chapter[] = [
     title: 'Hypothesis Testing',
     subtitle: 'Hypothesis Testing',
     source: '02_TESTING',
-    blurb: 'NHST, z/t-test, power, p-value, multiple testing',
+    blurb: 'NHST, z/t-test, power, p-value, multiple testing, เลือก test',
+    Content: lazy(() => import('./03-testing/content.mdx')),
   },
   {
     id: 'ab-testing',
