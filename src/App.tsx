@@ -34,7 +34,7 @@ export default function App() {
         )}
       </article>
       <footer className="small" style={{ marginTop: 60, paddingTop: 16, borderTop: '1px solid var(--border)' }}>
-        สรุปจากสไลด์ {chapter.source} · 2110203 COMP ENG MATH II
+        {chapter.group === 'extra' ? 'รวมจากทุกบท' : `สรุปจากสไลด์ ${chapter.source}`} · 2110203 COMP ENG MATH II
       </footer>
     </AppShell>
   )

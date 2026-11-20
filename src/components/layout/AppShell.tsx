@@ -1,5 +1,5 @@
 import { useRef, useState, type ReactNode } from 'react'
-import type { Chapter } from '../../chapters/registry'
+import { chapterLabel, type Chapter } from '../../chapters/registry'
 import { useAutoHideScrollbar, type Heading } from '../../lib/hooks'
 import { ChapterMenu } from './ChapterMenu'
 import { DistTablesPanel } from './DistTablesPanel'
@@ -40,7 +40,7 @@ export function AppShell({ chapter, headings, children }: Props) {
           ☰
         </button>
         <span className={styles.topTitle}>
-          บทที่ {chapter.no} · {chapter.subtitle}
+          {chapter.group === 'extra' ? chapter.subtitle : `${chapterLabel(chapter)} · ${chapter.subtitle}`}
         </span>
       </div>
       {open && <div className={styles.scrim} onClick={close} />}

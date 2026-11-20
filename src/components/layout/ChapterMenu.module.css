@@ -68,3 +68,6 @@
   border: 1px solid var(--border);
   color: var(--muted);
 }
+.groupGap {
+  margin-top: 14px;
+}

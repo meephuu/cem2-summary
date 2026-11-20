@@ -5,8 +5,10 @@ import { lazy } from 'react'
 export interface Chapter {
   /** used in the URL: #/<id> */
   id: string
-  /** number shown in the menu */
-  no: number
+  /** number shown in the menu ('C' for the cheat sheet) */
+  no: number | string
+  /** 'lesson' = regular chapter, 'extra' = pages in the second menu group (cheat sheet) */
+  group?: 'lesson' | 'extra'
   title: string
   subtitle: string
   /** slide file the summary is based on */
@@ -67,7 +69,20 @@ export const CHAPTERS: Chapter[] = [
     blurb: 'Metric, การแบ่งกลุ่ม, MDE และขนาดตัวอย่าง, peeking, sanity check',
     Content: lazy(() => import('./04-ab-testing/content.mdx')),
   },
+  {
+    id: 'cheat-sheet',
+    no: 'C',
+    group: 'extra',
+    title: 'Cheat Sheet',
+    subtitle: 'Cheat Sheet',
+    source: 'ทุกบท',
+    blurb: 'สูตรและทิปสำคัญจากทุกบท สำหรับจดโน้ต 2 แผ่นเข้าห้องสอบ',
+    Content: lazy(() => import('./cheat-sheet/content.mdx')),
+  },
 ]
+
+/** Header kicker: "บทที่ 3" for chapters, the menu group name for extra pages. */
+export const chapterLabel = (c: Chapter) => (c.group === 'extra' ? 'ทบทวนก่อนสอบ' : `บทที่ ${c.no}`)
 
 export const findChapter = (id: string) => CHAPTERS.find((c) => c.id === id)
 export const firstReady = () => CHAPTERS.find((c) => c.Content)!
