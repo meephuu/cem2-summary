@@ -530,3 +530,41 @@ $$
 $P(X \gt 40) = P(X \ge 41)$ ใช้ขอบ 40.5 · $P(X \ge 40)$ ใช้ขอบ 39.5 · $P(X \lt 40) = P(X \le 39)$ ใช้ขอบ 39.5 ให้วาดแท่งของจำนวนเต็มแล้วดูว่าต้องเอาแท่งไหนเข้ามาบ้าง
 
 </Warn>
+
+### HW12 ข้อ 6: พิสูจน์ว่า sample variance ลู่เข้า variance
+
+<Example title="HW12 ข้อ 6">
+
+LLN บอกว่าค่าเฉลี่ยตัวอย่างลู่เข้าค่าคาดหมายเมื่อ $n$ โตขึ้น ถ้ายอมรับข้อนี้ จงพิสูจน์ว่า sample variance ลู่เข้า variance จริง $\sigma^2$ เมื่อ $n$ โตขึ้นด้วย
+
+<Solution>
+
+**ขั้นที่ 1: กระจาย sample variance** (ใช้แบบหาร $n$ ก่อน)
+
+$$
+\hat\sigma^2_n = \frac1n\sum_{i=1}^n (X_i - \bar X_n)^2 = \frac1n\sum_{i=1}^n X_i^2 - 2\bar X_n \cdot \frac1n\sum_{i=1}^n X_i + \bar X_n^2 = \frac1n\sum_{i=1}^n X_i^2 - \bar X_n^2
+$$
+
+(พจน์กลาง $\frac1n\sum X_i = \bar X_n$ จึงได้ $-2\bar X_n^2 + \bar X_n^2 = -\bar X_n^2$)
+
+**ขั้นที่ 2: ใช้ LLN สองครั้ง**
+
+- $X_i$ เป็น i.i.d. จึงได้ $\bar X_n \to E[X] = \mu$ และ $\bar X_n^2 \to \mu^2$ (ฟังก์ชันกำลังสองต่อเนื่อง)
+- $X_i^2$ ก็เป็น i.i.d. เหมือนกัน (เป็นฟังก์ชันของ $X_i$) ใช้ LLN กับตัวแปรชุดใหม่ $Y_i = X_i^2$ ได้ $\frac1n\sum X_i^2 \to E[X^2]$
+
+**ขั้นที่ 3: รวมกัน**
+
+$$
+\hat\sigma^2_n \to E[X^2] - \mu^2 = \text{Var}(X) = \sigma^2
+$$
+
+**ขั้นที่ 4: แบบหาร $n - 1$** $s^2 = \frac{n}{n-1}\hat\sigma^2_n$ และ $\frac{n}{n-1} \to 1$ จึงได้ $s^2 \to \sigma^2$ เหมือนกัน
+
+</Solution>
+</Example>
+
+<Tip title="ทริคที่ใช้บ่อย">
+
+$\text{Var}(X) = E[X^2] - (E[X])^2$ ใช้ได้ทั้งกับประชากรและกับตัวอย่าง: $\frac1n\sum(X_i - \bar X)^2 = \overline{X^2} - \bar X^2$ (ค่าเฉลี่ยของกำลังสอง ลบ กำลังสองของค่าเฉลี่ย)
+
+</Tip>
