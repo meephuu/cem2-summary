@@ -600,3 +600,54 @@ $$
 
 </Solution>
 </Example>
+
+### HW11 ข้อ 1: MLE ของอัตราผลตอบแทน α (Moontaro prequel)
+
+<Example title="HW11 ข้อ 1">
+
+ราคาปิดแต่ละวันคือราคาวันก่อนคูณอัตราผลตอบแทน $\alpha$ (คงที่แต่ไม่รู้ค่า) บวก noise สำหรับสองวัน
+
+$$
+P(y_2, y_1, y_0 \mid \alpha) = P(y_2 \mid y_1)\,P(y_1 \mid y_0)\,P(y_0 \mid \alpha)
+$$
+
+โดย $y_2 \sim N(\alpha y_1, \sigma^2)$, $y_1 \sim N(\alpha y_0, \sigma^2)$ และ $y_0 \sim N(0, \lambda)$ ($\sigma^2$, $\lambda$ เป็นค่าคงที่ที่รู้) จงหา MLE ของ $\alpha$ จากราคาที่เห็น $y_2, y_1, y_0$
+
+<Solution>
+
+**ขั้นที่ 1: เขียน likelihood** แต่ละพจน์เป็น pdf ของ Normal
+
+$$
+L(\alpha) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(y_2 - \alpha y_1)^2}{2\sigma^2}} \cdot \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(y_1 - \alpha y_0)^2}{2\sigma^2}} \cdot \underbrace{P(y_0)}_{\text{ไม่มี } \alpha}
+$$
+
+$y_0 \sim N(0, \lambda)$ ไม่ขึ้นกับ $\alpha$ จึงเป็นค่าคงที่ ทิ้งได้ตอนหาค่าที่ทำให้สูงสุด
+
+**ขั้นที่ 2: take log**
+
+$$
+\ell(\alpha) = -\frac{(y_2 - \alpha y_1)^2}{2\sigma^2} - \frac{(y_1 - \alpha y_0)^2}{2\sigma^2} + C
+$$
+
+**ขั้นที่ 3: ดิฟแล้วตั้งเท่ากับ 0** (กฎลูกโซ่: อนุพันธ์ของ $(y_2 - \alpha y_1)^2$ คือ $-2y_1(y_2 - \alpha y_1)$)
+
+$$
+\frac{d\ell}{d\alpha} = \frac{y_1(y_2 - \alpha y_1) + y_0(y_1 - \alpha y_0)}{\sigma^2} = 0
+$$
+
+$$
+y_1 y_2 + y_0 y_1 = \alpha\,(y_1^2 + y_0^2) \quad\Longrightarrow\quad \hat\alpha_{\text{MLE}} = \frac{y_1(y_0 + y_2)}{y_0^2 + y_1^2}
+$$
+
+**ขั้นที่ 4: เช็กว่าเป็นจุดสูงสุด** $\dfrac{d^2\ell}{d\alpha^2} = -\dfrac{y_1^2 + y_0^2}{\sigma^2} \lt 0$ จึงเป็นจุดสูงสุดจริง
+
+สังเกตว่าคำตอบ**ไม่ขึ้นกับ $\sigma^2$ และ $\lambda$** ($\sigma^2 = 7.429$, $\lambda = 11.056$ ในโจทย์เป็นแค่ตัวหลอก) เพราะ $\sigma^2$ เป็นตัวหารร่วมที่ตัดกันตอนตั้งเท่ากับ 0 และ $\lambda$ อยู่ในพจน์ที่ไม่มี $\alpha$
+
+</Solution>
+</Example>
+
+<Tip title="มองให้ออกว่าเป็น least squares">
+
+การ maximize likelihood ของ Normal ที่ variance เท่ากันทุกพจน์ = การ minimize ผลรวมกำลังสองของความคลาดเคลื่อน $(y_2 - \alpha y_1)^2 + (y_1 - \alpha y_0)^2$ ถ้าจำได้แบบนี้จะเขียน log-likelihood ได้เร็วขึ้นมาก
+
+</Tip>
