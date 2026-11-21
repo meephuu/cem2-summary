@@ -63,6 +63,8 @@ export function useCanvas(draw: Draw) {
 export interface Heading {
   id: string
   text: string
+  /** custom marker from data-label (e.g. 'H'); numbered sections leave it undefined */
+  label?: string
 }
 
 /** Collect the chapter's h2 headings once the MDX has rendered. */
@@ -73,7 +75,11 @@ export function useHeadings(container: RefObject<HTMLElement | null>, key: strin
     if (!el) return
     const read = () =>
       setHeadings(
-        Array.from(el.querySelectorAll('h2[id]')).map((h) => ({ id: h.id, text: h.textContent ?? '' })),
+        Array.from(el.querySelectorAll<HTMLElement>('h2[id]')).map((h) => ({
+          id: h.id,
+          text: h.textContent ?? '',
+          label: h.dataset.label,
+        })),
       )
     read()
     // lazy-loaded chapters render after this effect, so watch for content

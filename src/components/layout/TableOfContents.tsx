@@ -15,7 +15,7 @@ export function TableOfContents({ headings, onPick }: Props) {
     <nav aria-label="หัวข้อในบทนี้" className={styles.toc}>
       <div className={styles.heading}>ในบทนี้</div>
       <ol className={styles.list}>
-        {headings.map((h, i) => (
+        {headings.map((h, i, all) => (
           <li key={h.id}>
             <button
               className={`${styles.link} ${active === h.id ? styles.active : ''}`}
@@ -24,7 +24,7 @@ export function TableOfContents({ headings, onPick }: Props) {
                 onPick?.()
               }}
             >
-              <span className={styles.num}>{i + 1}.</span> {h.text}
+              <span className={styles.num}>{h.label ?? all.slice(0, i + 1).filter((x) => !x.label).length}.</span> {h.text}
             </button>
           </li>
         ))}

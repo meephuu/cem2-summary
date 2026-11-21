@@ -16,6 +16,13 @@
   color: var(--accent);
   margin-right: 10px;
 }
+/* lettered sections (e.g. H = โจทย์การบ้าน) don't take a number */
+.prose h2[data-label] {
+  counter-increment: none;
+}
+.prose h2[data-label]::before {
+  content: attr(data-label);
+}
 
 .prose h3 {
   font-size: 20px;
