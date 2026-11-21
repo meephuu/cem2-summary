@@ -801,17 +801,6 @@ $$
 </Solution>
 </Example>
 
-<Example title="ข้อ 5">
-
-เครื่องจักรมีอายุการใช้งานแบบ Exponential เฉลี่ย 4 ปี ใช้มาแล้ว 3 ปียังไม่เสีย โอกาสที่จะใช้ได้อีกอย่างน้อย 2 ปีคือเท่าไร?
-
-<Solution label="เฉลย">
-
-mean $= 1/\lambda = 4$ ดังนั้น $\lambda = 0.25$ และ Exponential มี $P(X\ge x) = e^{-\lambda x}$ จาก memorylessness: $P(X\ge5\mid X\ge3) = P(X\ge2) = e^{-\lambda \cdot 2} = e^{-0.25\cdot2} = e^{-0.5}\approx 0.607$ (3 ปีที่ผ่านมาไม่มีผล)
-
-</Solution>
-</Example>
-
 <Tip title="บทต่อไป">
 
 บท LLN & CLT จะใช้ E, Var และ Normal จากบทนี้ทันที: ค่าเฉลี่ยของตัวอย่าง $\bar X_n$ มี $E = \mu$, $\mathrm{Var} = \sigma^2/n$ (มาจากสมบัติ Var ของผลรวมตัวแปรอิสระ) และเมื่อ n ใหญ่จะเป็น Normal

@@ -413,21 +413,6 @@ margin $= 1/\sqrt{n} = 1/\sqrt{900} = 1/30 \approx 0.033$ คือ ±3.3%
 </Solution>
 </Example>
 
-<Example title="ข้อ 5">
-
-$X_1, \dots, X_{50}$ เป็น i.i.d. มี $\mu = 20$ และ $\sigma = 5$ จงหา $P(19 \le \bar X \le 21)$
-
-<Solution label="เฉลย">
-
-SE $= \sigma/\sqrt n = 5/\sqrt{50} \approx 0.707$ แล้วแปลงเป็น Z ด้วย $Z = \dfrac{\bar X - \mu}{\sigma/\sqrt n}$
-
-$$
-P(19 \le \bar X \le 21) \approx P\!\left(\frac{19-20}{0.707} \le Z \le \frac{21-20}{0.707}\right) = P(-1.41 \le Z \le 1.41) = 2\Phi(1.41) - 1 \approx 2(0.9207) - 1 = 0.841
-$$
-
-</Solution>
-</Example>
-
 <Tip title="บทต่อไป">
 
 บท Sampling & Estimation จะถามต่อว่า ถ้าอยากประมาณพารามิเตอร์อื่นนอกจาก μ (เช่น λ ของ Exponential) จะทำยังไง คำตอบคือ MLE และ MAP ส่วน CI ในมุม Bayesian จะกลายเป็น credible interval
