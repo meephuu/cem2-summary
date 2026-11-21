@@ -79,6 +79,16 @@ export const CHAPTERS: Chapter[] = [
     blurb: 'สูตรและทิปสำคัญจากทุกบท สำหรับจดโน้ต 2 แผ่นเข้าห้องสอบ',
     Content: lazy(() => import('./cheat-sheet/content.mdx')),
   },
+  {
+    id: 'homework',
+    no: 'H',
+    group: 'extra',
+    title: 'Homework Problems',
+    subtitle: 'โจทย์การบ้าน',
+    source: 'HW10–12',
+    blurb: 'โจทย์การบ้านที่ทำด้วยมือได้ (ไม่ต้องเขียนโค้ด) พร้อมวิธีทำ',
+    Content: lazy(() => import('./homework/content.mdx')),
+  },
 ]
 
 /** Header kicker: "บทที่ 3" for chapters, the menu group name for extra pages. */

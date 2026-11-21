@@ -22,6 +22,10 @@ Probability recap, LLN/CLT, Sampling & Estimation, Hypothesis Testing, A/B Testi
 | 3 | `testing` | Hypothesis Testing (รวม 3A+3B เป็นบทเดียวตามที่เจ้าของสั่ง) | 02_TESTING ทั้ง 82 หน้า | ✅ |
 | 4 | `ab-testing` | A/B Testing | L03_ABtest | ✅ |
 
+### หน้า H โจทย์การบ้าน (`homework`, group extra ต่อจาก C)
+HW10 ทำแล้ว: 7 โจทย์ที่ทำมือได้ (TODO 1.6, 2–3, 4–6, 7, 8–9, 10.1–3, 11 ข้อ 1/4/8/9) พร้อมวิธีทำ + ตารางสรุปสูตร
+ตัดข้อที่ต้องรันโค้ด (1.1–1.5, 10.4, 11 ข้อ 2/3/5/6/7) · ถัดไป: HW11 (Testing), HW12 (A/B)
+
 ### บท 4 ทำแล้ว (บทสุดท้ายของไฟนอล)
 widget บท 4: SampleSizeCalculator, PeekingSimulator · เดินตาม 6 ขั้นของสไลด์ + design journal ซองเมล็ดทานตะวัน · มีแนวคำตอบข้อสอบ 2024 ข้อ 6 และโจทย์ฝึก W1–W4
 การบ้าน 12 ข้อที่ต้องส่ง (1, 2, 3, 9, 10) ไม่ได้เฉลยในเว็บ ใช้แค่ข้อแบบฝึกเสริม (5, 7, 8, 11)
