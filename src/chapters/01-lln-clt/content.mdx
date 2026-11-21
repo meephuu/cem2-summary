@@ -355,12 +355,12 @@ $$
 
 <Solution label="เฉลย">
 
-ลูกเต๋าหนึ่งลูก: $\mu = 3.5$, $\sigma^2 = \tfrac{6^2-1}{12} = \tfrac{35}{12} \approx 2.917$
+ลูกเต๋าหนึ่งลูก (Uniform แบบไม่ต่อเนื่อง 1 ถึง k): $\mu = \tfrac{k+1}{2} = 3.5$, $\sigma^2 = \tfrac{k^2-1}{12} = \tfrac{6^2-1}{12} = \tfrac{35}{12} \approx 2.917$
 
-$S_{100} \approx N(350,\ 291.7)$ คือ SD $\approx 17.08$
+ผลรวม n ครั้ง (CLT): $S_n \approx N(n\mu,\ n\sigma^2) = N(100 \times 3.5,\ 100 \times 2.917) = N(350,\ 291.7)$ คือ SD $= \sqrt{n}\,\sigma = \sqrt{291.7} \approx 17.08$
 
 $$
-P(S_{100} > 380) \approx P\!\left(Z > \frac{30}{17.08}\right) = P(Z > 1.76) \approx 1 - 0.9608 = 0.039
+P(S_{100} > 380) \approx P\!\left(Z > \frac{380 - n\mu}{\sqrt n\,\sigma}\right) = P\!\left(Z > \frac{380 - 350}{17.08}\right) = P(Z > 1.76) \approx 1 - 0.9608 = 0.039
 $$
 
 </Solution>
@@ -374,10 +374,10 @@ $$
 
 Exponential มี $\mu = 1/\lambda = 100$ และ $\sigma = 1/\lambda = 100$ (SD เท่ากับ mean)
 
-$\bar X_{36} \approx N(100,\ 100^2/36)$ คือ SE $= 100/6 \approx 16.67$
+CLT: $\bar X_n \approx N\!\left(\mu,\ \tfrac{\sigma^2}{n}\right) = N\!\left(100,\ \tfrac{100^2}{36}\right)$ คือ SE $= \dfrac{\sigma}{\sqrt n} = \dfrac{100}{\sqrt{36}} = \dfrac{100}{6} \approx 16.67$
 
 $$
-P(\bar X > 110) \approx P\!\left(Z > \frac{10}{16.67}\right) = P(Z > 0.6) \approx 1 - 0.7257 = 0.274
+P(\bar X > 110) \approx P\!\left(Z > \frac{110 - \mu}{\sigma/\sqrt n}\right) = P\!\left(Z > \frac{110 - 100}{16.67}\right) = P(Z > 0.6) \approx 1 - 0.7257 = 0.274
 $$
 
 สังเกตว่าประชากรเบ้มาก แต่ n = 36 ก็พอให้ใช้ CLT ได้ (ลองดูในกราฟ CLT ด้วย Exponential ที่ n = 36)
@@ -391,9 +391,9 @@ $$
 
 <Solution label="เฉลย">
 
-margin $= 1/\sqrt{900} = 1/30 \approx 0.033$ คือ ±3.3%
+margin $= 1/\sqrt{n} = 1/\sqrt{900} = 1/30 \approx 0.033$ คือ ±3.3%
 
-อยากได้ ±2%: $n \ge 1/0.02^2 = 2{,}500$ คน
+อยากได้ ±2%: $1/\sqrt n \le 0.02 \Rightarrow n \ge 1/\text{margin}^2 = 1/0.02^2 = 2{,}500$ คน
 
 </Solution>
 </Example>
@@ -419,10 +419,10 @@ $X_1, \dots, X_{50}$ เป็น i.i.d. มี $\mu = 20$ และ $\sigma = 5
 
 <Solution label="เฉลย">
 
-SE $= 5/\sqrt{50} \approx 0.707$
+SE $= \sigma/\sqrt n = 5/\sqrt{50} \approx 0.707$ แล้วแปลงเป็น Z ด้วย $Z = \dfrac{\bar X - \mu}{\sigma/\sqrt n}$
 
 $$
-P(19 \le \bar X \le 21) \approx P(-1.41 \le Z \le 1.41) = 2\Phi(1.41) - 1 \approx 2(0.9207) - 1 = 0.841
+P(19 \le \bar X \le 21) \approx P\!\left(\frac{19-20}{0.707} \le Z \le \frac{21-20}{0.707}\right) = P(-1.41 \le Z \le 1.41) = 2\Phi(1.41) - 1 \approx 2(0.9207) - 1 = 0.841
 $$
 
 </Solution>
@@ -460,7 +460,7 @@ $$
 
 ความคลาดเคลื่อนจึงลดแบบ $1/\sqrt n$ คือถ้าอยากได้ความแม่นเพิ่ม 10 เท่า ต้องใช้ข้อมูลเพิ่ม 100 เท่า
 
-**2.** $\sigma = 1$ จึงต้องมี $\frac{1}{\sqrt n} \le 0.01 \Rightarrow \sqrt n \ge 100 \Rightarrow n \ge 10{,}000$
+**2.** ต้องการ $\text{SD}(\bar X_n) = \frac{\sigma}{\sqrt n} \le 0.01$ เมื่อ $\sigma = 1$ จะได้ $\frac{1}{\sqrt n} \le 0.01 \Rightarrow \sqrt n \ge 100 \Rightarrow n \ge 10{,}000$
 
 **3.** จำนวนจุดที่ตกใน bin คือ $\text{Binomial}(n, p)$ สัดส่วน $\hat p$ จึงมี $\text{SD}(\hat p) = \sqrt{\frac{p(1-p)}{n}}$
 

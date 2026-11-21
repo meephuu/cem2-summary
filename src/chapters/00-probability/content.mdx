@@ -737,9 +737,9 @@ $$
 
 <Solution label="เฉลย">
 
-$\int_0^3 cx\,dx = \tfrac{9c}{2} = 1 \Rightarrow c = \tfrac29$
+pdf ต้องอินทิเกรตได้ 1: $\displaystyle\int f(x)\,dx = \int_0^3 cx\,dx = \tfrac{9c}{2} = 1 \Rightarrow c = \tfrac29$
 
-$E[X] = \int_0^3 x\cdot\tfrac29x\,dx = \tfrac29\cdot\tfrac{27}{3} = 2$
+$\displaystyle E[X] = \int x\,f(x)\,dx = \int_0^3 x\cdot\tfrac29x\,dx = \tfrac29\cdot\tfrac{27}{3} = 2$
 
 </Solution>
 </Example>
@@ -750,9 +750,19 @@ $E[X] = \int_0^3 x\cdot\tfrac29x\,dx = \tfrac29\cdot\tfrac{27}{3} = 2$
 
 <Solution label="เฉลย">
 
-$P(+) = 0.9(0.02) + 0.05(0.98) = 0.018 + 0.049 = 0.067$
+**Total probability:**
 
-$P(\text{ป่วย}\mid +) = 0.018/0.067 \approx 0.269$ คือประมาณ 27% เท่านั้น
+$$
+P(+) = P(+\mid\text{ป่วย})\,P(\text{ป่วย}) + P(+\mid\text{ไม่ป่วย})\,P(\text{ไม่ป่วย}) = 0.9(0.02) + 0.05(0.98) = 0.018 + 0.049 = 0.067
+$$
+
+**Bayes' rule:**
+
+$$
+P(\text{ป่วย}\mid +) = \frac{P(+\mid\text{ป่วย})\,P(\text{ป่วย})}{P(+)} = \frac{0.018}{0.067} \approx 0.269
+$$
+
+คือประมาณ 27% เท่านั้น
 
 </Solution>
 </Example>
@@ -764,10 +774,14 @@ $\mathrm{Var}(X) = 1$, $\mathrm{Var}(Y) = 2$, $\mathrm{Cov}(X,Y) = 0.5$ จง�
 <Solution label="เฉลย">
 
 $$
-\mathrm{Var}(2X-3Y) = 2^2(1) + (-3)^2(2) + 2(2)(-3)(0.5) = 4 + 18 - 6 = 16
+\mathrm{Var}(aX+bY) = a^2\,\mathrm{Var}(X) + b^2\,\mathrm{Var}(Y) + 2ab\,\mathrm{Cov}(X,Y)
 $$
 
-ใช้ $\mathrm{Var}(aX+bY) = a^2\mathrm{Var}X + b^2\mathrm{Var}Y + 2ab\,\mathrm{Cov}(X,Y)$
+แทน $a = 2$, $b = -3$
+
+$$
+\mathrm{Var}(2X-3Y) = 2^2(1) + (-3)^2(2) + 2(2)(-3)(0.5) = 4 + 18 - 6 = 16
+$$
 
 </Solution>
 </Example>
@@ -778,10 +792,10 @@ $X\sim N(50, 5^2)$ และ $Y\sim N(30, 12^2)$ อิสระกัน จง
 
 <Solution label="เฉลย">
 
-$X+Y\sim N(80,\;25+144) = N(80, 13^2)$
+ผลรวมของ Normal ที่อิสระกัน: $X+Y \sim N(\mu_X+\mu_Y,\ \sigma_X^2+\sigma_Y^2) = N(50+30,\ 25+144) = N(80, 13^2)$
 
 $$
-P(X+Y>100) = P\!\left(Z>\tfrac{20}{13}\right) \approx P(Z>1.54) \approx 1-0.9382 = 0.062
+P(X+Y>100) = P\!\left(Z>\frac{100-\mu}{\sigma}\right) = P\!\left(Z>\frac{100-80}{13}\right) \approx P(Z>1.54) \approx 1-0.9382 = 0.062
 $$
 
 </Solution>
@@ -793,7 +807,7 @@ $$
 
 <Solution label="เฉลย">
 
-mean = $1/\lambda = 4$ ดังนั้น $\lambda = 0.25$ และจาก memorylessness: $P(X\ge5\mid X\ge3) = P(X\ge2) = e^{-0.25\cdot2} = e^{-0.5}\approx 0.607$ (3 ปีที่ผ่านมาไม่มีผล)
+mean $= 1/\lambda = 4$ ดังนั้น $\lambda = 0.25$ และ Exponential มี $P(X\ge x) = e^{-\lambda x}$ จาก memorylessness: $P(X\ge5\mid X\ge3) = P(X\ge2) = e^{-\lambda \cdot 2} = e^{-0.25\cdot2} = e^{-0.5}\approx 0.607$ (3 ปีที่ผ่านมาไม่มีผล)
 
 </Solution>
 </Example>

@@ -461,7 +461,7 @@ prior ของ B และ C เป็น 0 ผลคูณของสอง�
 
 <Solution label="เฉลย">
 
-$F(x) = \int_0^x 3t^2\,dt = x^3$ ตั้ง $p = x^3$ จะได้ $F^{-1}(p) = p^{1/3}$ และ $x = 0.125^{1/3} = 0.5$
+$F(x) = \int_0^x 3t^2\,dt = x^3$ ตั้ง $p = x^3$ จะได้ $F^{-1}(p) = p^{1/3}$ และ $x = F^{-1}(0.125) = 0.125^{1/3} = 0.5$
 
 </Solution>
 </Example>
@@ -474,7 +474,7 @@ $F(x) = \int_0^x 3t^2\,dt = x^3$ ตั้ง $p = x^3$ จะได้ $F^{-1}(
 
 $L(\lambda) = \prod \dfrac{\lambda^{x_i}e^{-\lambda}}{x_i!} \propto \lambda^{\sum x_i}e^{-4\lambda} = \lambda^6 e^{-4\lambda}$
 
-$\ln L = 6\ln\lambda - 4\lambda + \text{ค่าคงที่}$ ดิฟได้ $\dfrac{6}{\lambda} - 4 = 0$ ดังนั้น $\hat\lambda = 1.5$ (เท่ากับค่าเฉลี่ยตัวอย่างพอดี)
+$\ln L = \left(\sum x_i\right)\ln\lambda - n\lambda + \text{ค่าคงที่} = 6\ln\lambda - 4\lambda + \text{ค่าคงที่}$ ดิฟได้ $\dfrac{\sum x_i}{\lambda} - n = 0$ ดังนั้น $\hat\lambda = \dfrac{\sum x_i}{n} = \dfrac{6}{4} = 1.5$ (เท่ากับค่าเฉลี่ยตัวอย่างพอดี)
 
 </Solution>
 </Example>
@@ -510,11 +510,11 @@ $$
 
 <Solution label="เฉลย">
 
-likelihood: $0.5^4 = 0.0625$ และ $0.8^4 = 0.4096$ ดังนั้น **MLE = 0.8**
+likelihood $P(\text{หัว 4 ครั้ง} \mid p) = p^4$: $0.5^4 = 0.0625$ และ $0.8^4 = 0.4096$ ดังนั้น **MLE = 0.8**
 
-likelihood × prior: $0.0625 \times 0.9 = 0.05625$ และ $0.4096 \times 0.1 = 0.04096$ ดังนั้น **MAP = 0.5**
+likelihood × prior $P(\text{data} \mid p)\,P(p)$: $0.0625 \times 0.9 = 0.05625$ และ $0.4096 \times 0.1 = 0.04096$ ดังนั้น **MAP = 0.5**
 
-posterior ของเหรียญปกติ $= 0.05625/(0.05625 + 0.04096) \approx 0.579$ เพราะ prior ที่เชื่อว่าเหรียญปกติแรงกว่าหลักฐาน 4 ครั้ง
+posterior ของเหรียญปกติ $P(p = 0.5 \mid \text{data}) = \dfrac{P(\text{data}\mid 0.5)P(0.5)}{\sum_p P(\text{data}\mid p)P(p)} = \dfrac{0.05625}{0.05625 + 0.04096} \approx 0.579$ เพราะ prior ที่เชื่อว่าเหรียญปกติแรงกว่าหลักฐาน 4 ครั้ง
 
 </Solution>
 </Example>
