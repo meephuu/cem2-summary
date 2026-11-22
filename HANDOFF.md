@@ -34,7 +34,13 @@ HW11 ใส่แล้ว: บท 2 = ข้อ 1 (MLE) · บท 3 = ข้อ
 ### บท 4 ทำแล้ว (บทสุดท้ายของไฟนอล)
 widget บท 4: SampleSizeCalculator, PeekingSimulator · เดินตาม 6 ขั้นของสไลด์ + design journal ซองเมล็ดทานตะวัน · มีแนวคำตอบข้อสอบ 2024 ข้อ 6 และโจทย์ฝึก W1–W4
 HW12 เฉลยครบในส่วน H ของบท 4 (ข้อ 1–5, 7–11) และบท 1 (ข้อ 6) · แบบฝึกหัดบท 4 = ขนาดตัวอย่าง, multiple correction (แต่งเอง), ครูจับโค้ด AI (practice W7–W10) 2 ข้อ
-ไอเดียถัดไป (ยังไม่ทำ): หน้า cheat sheet สำหรับจดโน้ต 2 แผ่น
+หน้า cheat sheet (`#/cheat-sheet`, เมนูแถว C) ทำแล้ว: รวมสูตร/สูตรสำเร็จ/ตัวเลขคำตอบจากทุกบท + HW10–12 + ข้อสอบ 2024 + โจทย์ฝึก, ตาราง Φ(z) ย่อ, χ² วิกฤต, คำเตือนหัวตาราง t ปี 2024
+- สไตล์อยู่ที่ `src/styles/cheatsheet.css` (บนจอ = `.prose.cheat` แน่นขึ้น · พิมพ์ = `html[data-page='cheat-sheet']` A4 2 คอลัมน์, `--cs-size: 8pt`)
+- ต้องพิมพ์ได้ ≤ 4 หน้า (2 แผ่นหน้า-หลัง) ตอนนี้ได้ ~3.75 หน้า ถ้าเพิ่มเนื้อหาต้องเช็กจำนวนหน้าใหม่ (Playwright `page.pdf(prefer_css_page_size=True)`)
+- ระวัง: อะไรที่กว้างเกินคอลัมน์ (สูตร display ยาว, ตารางที่ห้ามตัดบรรทัด) ทำให้ Chrome ย่อทั้งหน้าตอนพิมพ์ → เช็ก `scrollWidth` = 748 ที่ viewport 748 + print media
+- ปุ่ม 🖨️ (`PrintButton`) เรียก `window.print()` · element ที่มี `data-noprint` ถูกซ่อนตอนพิมพ์หน้านี้
+
+แถบด้านซ้ายพับเก็บได้บน desktop (ปุ่มมุมขวาบนของ sidebar / ปุ่ม “เมนู” มุมซ้ายบนเพื่อเปิดกลับ) จำสถานะใน localStorage `cem2:sidebar-collapsed`
 
 ### บท 3 ทำแล้ว (เดิมวางแผนแยก 3A/3B ด้านล่าง เจ้าของสั่งให้รวมเป็นบทใหญ่บทเดียว)
 widget บท 3: PValueExplorer, RejectionPowerExplorer, BaseRateGrid · `lib/math.ts` มี tCdf/tPdf/betaInc/logGamma/invertCdf แล้ว

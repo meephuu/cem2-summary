@@ -15,7 +15,60 @@
   padding: 32px 4px 24px 0;
 }
 .brandRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
   margin: 0 0 20px 10px;
+}
+
+/* ---------- fold the sidebar away (desktop only) ---------- */
+.collapseButton,
+.expandButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 10px;
+}
+.collapseButton {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
+.collapseButton:hover,
+.expandButton:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.expandButton {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 25;
+  height: 36px;
+  padding: 0 12px 0 10px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+.layout.collapsed {
+  grid-template-columns: minmax(0, 1fr);
+  /* leave room for the fixed show-sidebar button on narrower desktops */
+  padding: 0 72px;
+}
+.layout.collapsed .sidebar {
+  display: none;
+}
+.layout.collapsed .main {
+  margin: 0 auto;
+  width: 100%;
 }
 .brand {
   font-weight: 700;
@@ -38,6 +91,17 @@
 }
 
 @media (max-width: 900px) {
+  /* on small screens the sidebar is a drawer, so the fold buttons don't apply */
+  .collapseButton,
+  .expandButton {
+    display: none;
+  }
+  .layout.collapsed {
+    padding: 0 16px;
+  }
+  .layout.collapsed .sidebar {
+    display: block;
+  }
   .layout {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
