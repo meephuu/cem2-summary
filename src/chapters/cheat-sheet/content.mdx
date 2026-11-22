@@ -7,7 +7,7 @@
 ### กฎพื้นฐาน
 
 - $P(A^c)=1-P(A)$ · $P(A\cup B)=P(A)+P(B)-P(A\cap B)$ · ทุกกรณีรวมกัน = 1
-- **Conditional:** $P(A\mid B)=\frac{P(A\cap B)}{P(B)}$ = รู้ว่า B เกิดแล้ว โลก “หด” เหลือแค่ B (ทอยเต๋า รู้ว่าได้คู่ → $P(\ge 4)=2/3$)
+- **Conditional:** $P(A\mid B)=\dfrac{P(A\cap B)}{P(B)}$ = รู้ว่า B เกิดแล้ว โลก “หด” เหลือแค่ B (ทอยเต๋า รู้ว่าได้คู่ → $P(\ge 4)=2/3$)
 - **กฎการคูณ:** $P(A\cap B)=P(A\mid B)P(B)=P(B\mid A)P(A)$
 - **Total probability:** $P(B)=P(B\mid A)P(A)+P(B\mid A^c)P(A^c)$
 - **Bayes (กลับด้านเงื่อนไข):** $P(A\mid B)=\dfrac{P(B\mid A)P(A)}{P(B\mid A)P(A)+P(B\mid A^c)P(A^c)}$
@@ -24,14 +24,14 @@ $P(A\cap B)=0$ เช่น ทอยครั้งเดียวได้ 1 �
 แปลคำก่อน: **power** $=P(+\mid \text{ป่วย})$ · **significance α** (false positive) $=P(+\mid \text{ไม่ป่วย})$ · **base rate** $b=P(\text{ป่วย})$
 
 $$
-P(\text{ป่วยจริง}\mid +)=\frac{\text{power}\cdot b}{\text{power}\cdot b+\alpha\,(1-b)}
+P(\text{ป่วยจริง}\mid +)=\dfrac{\text{power}\cdot b}{\text{power}\cdot b+\alpha\,(1-b)}
 $$
 
 | โจทย์ | แทนค่า | ตอบ |
 |---|---|---|
-| โรค 1%, ตรวจเจอ 90%, บวกปลอม 5% | $\frac{0.9(0.01)}{0.009+0.05(0.99)}=\frac{0.009}{0.0585}$ | 0.154 |
-| **2024 ข้อ 1.4** มะเร็ง 1/16, α = 0.01, power 0.8 | $\frac{0.8/16}{0.05+0.01(15/16)}=\frac{0.05}{0.059375}$ | **0.842** |
-| ยา 100 ตัว ได้ผลจริง 10%, power 0.8, α 0.05 | $\frac{8}{8+4.5}$ | 0.64 |
+| โรค 1%, ตรวจเจอ 90%, บวกปลอม 5% | $\dfrac{0.9(0.01)}{0.009+0.05(0.99)}=\dfrac{0.009}{0.0585}$ | 0.154 |
+| **2024 ข้อ 1.4** มะเร็ง 1/16, α = 0.01, power 0.8 | $\dfrac{0.8/16}{0.05+0.01(15/16)}=\dfrac{0.05}{0.059375}$ | **0.842** |
+| ยา 100 ตัว ได้ผลจริง 10%, power 0.8, α 0.05 | $\dfrac{8}{8+4.5}$ | 0.64 |
 
 วาด tree diagram ช่วยไม่ให้สับสน · ความหมายของ probability: **Frequentist** = อัตราเมื่อทำซ้ำมากๆ (θ ค่าคงที่) · **Bayesian** = ระดับความเชื่อ (θ มีการแจกแจง, มี prior)
 
@@ -62,11 +62,11 @@ $$
 
 <Example title="ข้อสอบ 2024 ข้อ 1.2: f(x) = c√x บน [0, 1] จงหา E[X]">
 
-$\int_0^1 c\sqrt x\,dx=\frac{2c}{3}=1\Rightarrow c=\frac32$ · $E[X]=\int_0^1 x\cdot\frac32\sqrt x\,dx=\frac32\cdot\frac25=\mathbf{\frac35}$ · $E[X^2]=\frac32\cdot\frac27=\frac37$ → $\mathrm{Var}=\frac37-\frac{9}{25}=\frac{12}{175}\approx0.069$
+$\int_0^1 c\sqrt x\,dx=\dfrac{2c}{3}=1\Rightarrow c=\dfrac32$ · $E[X]=\int_0^1 x\cdot\dfrac32\sqrt x\,dx=\dfrac32\cdot\dfrac25=\mathbf{\dfrac35}$ · $E[X^2]=\dfrac32\cdot\dfrac27=\dfrac37$ → $\mathrm{Var}=\dfrac37-\dfrac{9}{25}=\dfrac{12}{175}\approx0.069$
 
 </Example>
 
-ตัวอย่างอื่น: $f=\frac38x^2$ บน [0,2] → $F=\frac{x^3}{8}$, E = 1.5, Var = 0.15 · ตาราง 100/150/200 (โอกาส 0.5/0.3/0.2) → E = 135, $E[X^2]=19750$, Var = 1525 · VarX = 1, VarY = 2, Cov = 0.5 → $\mathrm{Var}(2X-3Y)=4+18-6=16$ · E = 5, Var = 4 → Y = 3X − 2 มี E = 13, Var = 36
+ตัวอย่างอื่น: $f=\dfrac38x^2$ บน [0,2] → $F=\dfrac{x^3}{8}$, E = 1.5, Var = 0.15 · ตาราง 100/150/200 (โอกาส 0.5/0.3/0.2) → E = 135, $E[X^2]=19750$, Var = 1525 · VarX = 1, VarY = 2, Cov = 0.5 → $\mathrm{Var}(2X-3Y)=4+18-6=16$ · E = 5, Var = 4 → Y = 3X − 2 มี E = 13, Var = 36
 
 ### หลายตัวแปร: joint · marginal · ผลรวม
 
@@ -74,7 +74,7 @@ $\int_0^1 c\sqrt x\,dx=\frac{2c}{3}=1\Rightarrow c=\frac32$ · $E[X]=\int_0^1 x\
 - **อิสระ** ⇔ $f_{X,Y}=f_X\,f_Y$ **ทุกช่อง** (ช่องเดียวไม่ตรง = ไม่อิสระ เช่น 0.4 × 0.3 = 0.12 ≠ 0.1)
 - **ผลรวม Z = X + Y (อิสระ):** convolution $f_Z(z)=\int f_X(x)f_Y(z-x)\,dx$ · ลูกเต๋า 2 ลูกรวม 7 = 6/36
 - **ทริค fix ตัวหนึ่ง:** $P(Z\in A)=\int f_X(x)\,P(Y\in A-x)\,dx$ ถ้า Y uniform ข้างในคือ “ความยาวที่ซ้อน ÷ ความกว้าง” แบ่งกรณีตามทิศที่ช่วงเลื่อน (HW10 ข้อ 7 → 0.5)
-- U(0,1) + U(0,1) = สามเหลี่ยมบน [0, 2] · $\frac{U_1+U_2}{2}\sim T(0,1)$: $f=4x$ / $4(1-x)$, $F=2x^2$ ($x\le\frac12$), E = ½, Var = $\frac14(\frac1{12}+\frac1{12})=\frac1{24}$
+- U(0,1) + U(0,1) = สามเหลี่ยมบน [0, 2] · $\dfrac{U_1+U_2}{2}\sim T(0,1)$: $f=4x$ / $4(1-x)$, $F=2x^2$ ($x\le\dfrac12$), E = ½, Var = $\dfrac14(\dfrac1{12}+\dfrac1{12})=\dfrac1{24}$
 - ผลคูณตัวแปรอิสระ $E[\prod X_i]=\prod E[X_i]$ (ราคาเหรียญ $10\times1.003^{30}\approx10.94$) แต่ผลคูณเบ้ขวา mean > median → E[return] > 0 ได้ทั้งที่โอกาสกำไร \< 50% (ขึ้น 10% แล้วลง 10% = 0.99)
 
 ## Covariance · Correlation
@@ -85,7 +85,7 @@ $\int_0^1 c\sqrt x\,dx=\frac{2c}{3}=1\Rightarrow c=\frac32$ · $E[X]=\int_0^1 x\
 
 <Tip title="หา ρ จากข้อมูล (ข้อสอบ 2024 ข้อ 1.1)">
 
-(1) $\bar x,\bar y$ (2) $\mathrm{Cov}=\overline{xy}-\bar x\bar y$ (3) $\mathrm{Var}X=\overline{x^2}-\bar x^2$, $\mathrm{Var}Y=\overline{y^2}-\bar y^2$ (4) $\rho=\mathrm{Cov}/\sqrt{\mathrm{Var}X\,\mathrm{Var}Y}$ จะหาร n หรือ n − 1 ก็ได้ ρ เท่ากัน (ตัดกันหมด) · (1,2),(2,4),(3,5): $\bar x=2$, $\bar y=\frac{11}3$, Cov = $\frac{25}3-\frac{22}3=1$, VarX = $\frac23$, VarY = $\frac{14}9$ → ρ ≈ **0.982**
+(1) $\bar x,\bar y$ (2) $\mathrm{Cov}=\overline{xy}-\bar x\bar y$ (3) $\mathrm{Var}X=\overline{x^2}-\bar x^2$, $\mathrm{Var}Y=\overline{y^2}-\bar y^2$ (4) $\rho=\mathrm{Cov}/\sqrt{\mathrm{Var}X\,\mathrm{Var}Y}$ จะหาร n หรือ n − 1 ก็ได้ ρ เท่ากัน (ตัดกันหมด) · (1,2),(2,4),(3,5): $\bar x=2$, $\bar y=\dfrac{11}3$, Cov = $\dfrac{25}3-\dfrac{22}3=1$, VarX = $\dfrac23$, VarY = $\dfrac{14}9$ → ρ ≈ **0.982**
 
 </Tip>
 
@@ -95,10 +95,10 @@ $\int_0^1 c\sqrt x\,dx=\frac{2c}{3}=1\Rightarrow c=\frac32$ · $E[X]=\int_0^1 x\
 
 </Warn>
 
-- **Corr(X, X + A)** (A อิสระกับ X) $=\sqrt{\frac{\mathrm{Var}X}{\mathrm{Var}X+\mathrm{Var}A}}$ · X ~ U(−1,1): A = 10 → 1, A ~ U(−1,1) → 0.707, U(−10,10) → 0.0995, U(−100,100) → 0.010 · **บวกค่าคงที่ไม่เปลี่ยน Var/Cov** → ρ ขึ้นกับ spread ไม่ขึ้นกับตำแหน่ง (HW10 ข้อ 8–9)
-- **Covariance matrix** $\Sigma_{ij}=\mathrm{Cov}(X_i,X_j)$: สมมาตร ($C=B$ เสมอ), ทแยงคือ Var **ติดลบไม่ได้**, positive semi-definite · ดู scatter: เอียงขึ้น → Cov > 0, แผ่ตามแกนไหนกว้าง Var แกนนั้นใหญ่ · $\Sigma=\begin{pmatrix}4&3\\3&9\end{pmatrix}$ → $\rho=\frac{3}{2\cdot3}=0.5$
+- **Corr(X, X + A)** (A อิสระกับ X) $=\sqrt{\dfrac{\mathrm{Var}X}{\mathrm{Var}X+\mathrm{Var}A}}$ · X ~ U(−1,1): A = 10 → 1, A ~ U(−1,1) → 0.707, U(−10,10) → 0.0995, U(−100,100) → 0.010 · **บวกค่าคงที่ไม่เปลี่ยน Var/Cov** → ρ ขึ้นกับ spread ไม่ขึ้นกับตำแหน่ง (HW10 ข้อ 8–9)
+- **Covariance matrix** $\Sigma_{ij}=\mathrm{Cov}(X_i,X_j)$: สมมาตร ($C=B$ เสมอ), ทแยงคือ Var **ติดลบไม่ได้**, positive semi-definite · ดู scatter: เอียงขึ้น → Cov > 0, แผ่ตามแกนไหนกว้าง Var แกนนั้นใหญ่ · $\Sigma=\begin{pmatrix}4&3\\3&9\end{pmatrix}$ → $\rho=\dfrac{3}{2\cdot3}=0.5$
 - **Multivariate Gaussian** $N(\boldsymbol\mu,\Sigma)$: เนินวงรี · $A\mathbf X+\mathbf b\sim N(A\boldsymbol\mu+\mathbf b,\,A\Sigma A^T)$ · เฉพาะ jointly Gaussian: **uncorrelated ⇔ independent**
-- **Portfolio:** $\mathrm{Var}(\frac12X+\frac12Y)=\frac14(\mathrm{Var}X+\mathrm{Var}Y+2\mathrm{Cov})$ → กระจายลงทุนในสินทรัพย์ที่ **Cov ต่ำ/ติดลบ** (HW10 ข้อ 11: a เดี่ยว 10, a+b 3.25, a+c 7.5, a+d 8.75 ×10⁻³)
+- **Portfolio:** $\mathrm{Var}(\dfrac12X+\dfrac12Y)=\dfrac14(\mathrm{Var}X+\mathrm{Var}Y+2\mathrm{Cov})$ → กระจายลงทุนในสินทรัพย์ที่ **Cov ต่ำ/ติดลบ** (HW10 ข้อ 11: a เดี่ยว 10, a+b 3.25, a+c 7.5, a+d 8.75 ×10⁻³)
 
 ## การแจกแจงที่ต้องรู้
 
@@ -106,16 +106,16 @@ $\int_0^1 c\sqrt x\,dx=\frac{2c}{3}=1\Rightarrow c=\frac32$ · $E[X]=\int_0^1 x\
 |---|---|---|---|
 | **Bernoulli(p)** ใช่/ไม่ใช่ 1 ครั้ง | $p^a(1-p)^{1-a}$ | $p$ | $p(1-p)$ |
 | **Binomial(n,p)** นับสำเร็จใน n ครั้ง | $\binom{n}{a}p^a(1-p)^{n-a}$ | $np$ | $np(1-p)$ |
-| **Uniform** 1…n (ลูกเต๋า) | $\frac1n$ | $\frac{n+1}2$ | $\frac{n^2-1}{12}$ |
-| **Geometric(p)** #**ล้มเหลว**ก่อนสำเร็จ (0,1,…) | $(1-p)^a p$ | $\frac{1-p}p$ | $\frac{1-p}{p^2}$ |
-| **Poisson(λ)** #เหตุการณ์ต่อช่วง | $\frac{\lambda^a e^{-\lambda}}{a!}$ | $\lambda$ | $\lambda$ |
+| **Uniform** 1…n (ลูกเต๋า) | $\dfrac1n$ | $\dfrac{n+1}2$ | $\dfrac{n^2-1}{12}$ |
+| **Geometric(p)** #**ล้มเหลว**ก่อนสำเร็จ (0,1,…) | $(1-p)^a p$ | $\dfrac{1-p}p$ | $\dfrac{1-p}{p^2}$ |
+| **Poisson(λ)** #เหตุการณ์ต่อช่วง | $\dfrac{\lambda^a e^{-\lambda}}{a!}$ | $\lambda$ | $\lambda$ |
 
 | ต่อเนื่อง | pdf / cdf | E | Var |
 |---|---|---|---|
-| **Normal** $N(\mu,\sigma^2)$ ผลรวมหลายปัจจัย | $\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$ / ตาราง | $\mu$ | $\sigma^2$ |
-| **Exponential(λ)** เวลารอ, x ≥ 0 | $\lambda e^{-\lambda x}$ / $1-e^{-\lambda x}$ | $\frac1\lambda$ | $\frac1{\lambda^2}$ |
-| **Uniform(a,b)** | $\frac1{b-a}$ / $\frac{x-a}{b-a}$ | $\frac{a+b}2$ | $\frac{(b-a)^2}{12}$ |
-| **Pareto** รวยกระจุก, $x\ge x_m$ | $\frac{\alpha x_m^\alpha}{x^{\alpha+1}}$ / $1-(\frac{x_m}{x})^\alpha$ | — | อาจ ∞ |
+| **Normal** $N(\mu,\sigma^2)$ ผลรวมหลายปัจจัย | $\dfrac{1}{\sqrt{2\pi}\,\sigma}\exp\!\big(-\dfrac{(x-\mu)^2}{2\sigma^2}\big)$ / ตาราง | $\mu$ | $\sigma^2$ |
+| **Exponential(λ)** เวลารอ, x ≥ 0 | $\lambda e^{-\lambda x}$ / $1-e^{-\lambda x}$ | $\dfrac1\lambda$ | $\dfrac1{\lambda^2}$ |
+| **Uniform(a,b)** | $\dfrac1{b-a}$ / $\dfrac{x-a}{b-a}$ | $\dfrac{a+b}2$ | $\dfrac{(b-a)^2}{12}$ |
+| **Pareto** รวยกระจุก, $x\ge x_m$ | $\dfrac{\alpha x_m^\alpha}{x^{\alpha+1}}$ / $1-(\dfrac{x_m}{x})^\alpha$ | — | อาจ ∞ |
 
 - **Geometric มี 2 นิยาม:** วิชานี้นับ #ล้มเหลว (เริ่ม 0) ถ้านับ #ครั้งที่ลองรวมครั้งสำเร็จ (เริ่ม 1) mean = $1/p$ · “สำเร็จครั้งที่ k” = ล้มเหลว k − 1
 - **Memoryless** $P(X\ge m+n\mid X\ge m)=P(X\ge n)$ มีแค่ **Geometric** และ **Exponential** · Gambler's fallacy: แดง 10 ตาติด ตาหน้าก็ยังโอกาสเท่าเดิม
@@ -124,7 +124,7 @@ $\int_0^1 c\sqrt x\,dx=\frac{2c}{3}=1\Rightarrow c=\frac32$ · $E[X]=\int_0^1 x\
 
 ## Normal และตาราง Φ(z)
 
-- $Z=\frac{X-\mu}{\sigma}\sim N(0,1)$ = “ห่างจาก mean กี่ SD” · $aX+b\sim N(a\mu+b,\,a^2\sigma^2)$
+- $Z=\dfrac{X-\mu}{\sigma}\sim N(0,1)$ = “ห่างจาก mean กี่ SD” · $aX+b\sim N(a\mu+b,\,a^2\sigma^2)$
 - อิสระ: $X\pm Y\sim N(\mu_1\pm\mu_2,\ \sigma_1^2+\sigma_2^2)$ → **บวก Var ไม่ใช่บวก SD** (SD 3, 4 → 5 ไม่ใช่ 7)
 - 68–95–99.7 ภายใน ±1, ±2, ±3 SD · $P(Z>z)=1-\Phi(z)$ · $P(Z\lt -z)=1-\Phi(z)$ · $P(a\lt Z\lt b)=\Phi(b)-\Phi(a)$
 - ส่วนสูง $N(170,10^2)$: $P(X>185)=P(Z>1.5)=0.0668$ · $N(50,5^2)+N(30,12^2)=N(80,13^2)$: $P(>100)=P(Z>1.54)\approx0.062$
@@ -159,26 +159,26 @@ $\int_0^1 c\sqrt x\,dx=\frac{2c}{3}=1\Rightarrow c=\frac32$ · $E[X]=\int_0^1 x\
 | ค่าเฉลี่ย $\bar X_n$ | $\mu$ | $\sigma^2/n$ | $\sigma/\sqrt n$ = **SE** (เล็กลง) |
 
 - **LLN:** $\bar X_n\xrightarrow{P}\mu$ คือ $\lim_{n\to\infty}P(\lvert\bar X_n-\mu\rvert\lt a)=1$ ทุก a > 0 (weak = in probability, strong = almost surely) · ทำงานด้วยการ**เจือจาง** ไม่ใช่ “ชดเชย” · ฮิสโตแกรม → pdf จริง
-- **CLT:** σ² จำกัด, n ใหญ่ (≥ 30; ข้อมูลเบ้มากต้องมากกว่า) → $\bar X_n\approx N(\mu,\frac{\sigma^2}{n})$, $S_n\approx N(n\mu,n\sigma^2)$ ไม่ว่าประชากรหน้าตาแบบไหน · ใช้กับ discrete ได้ (converge in distribution = cdf ลู่เข้า)
+- **CLT:** σ² จำกัด, n ใหญ่ (≥ 30; ข้อมูลเบ้มากต้องมากกว่า) → $\bar X_n\approx N(\mu,\dfrac{\sigma^2}{n})$, $S_n\approx N(n\mu,n\sigma^2)$ ไม่ว่าประชากรหน้าตาแบบไหน · ใช้กับ discrete ได้ (converge in distribution = cdf ลู่เข้า)
 - **กฎรากที่สอง:** error ลดตาม $\sqrt n$ → ลด error ครึ่งหนึ่งต้องเพิ่มข้อมูล 4 เท่า · ต้องการ $\sigma/\sqrt n\le0.01$ (σ = 1) → n ≥ 10,000
 - LLN บอกว่า $\bar X$ ไป**ที่ไหน** · CLT บอกว่าคลาดเคลื่อน**แค่ไหน รูปร่างอะไร**
 
 <Tip title="สูตรสำเร็จใช้ CLT 4 ขั้น">
 
-(1) ถามผลรวม $S_n$ (จำนวนทั้งหมด) หรือค่าเฉลี่ย $\bar X$ (สัดส่วน/ค่าเฉลี่ย) (2) หา μ, σ² ของข้อมูล 1 ตัว (Bernoulli: p, p(1−p)) (3) คูณ/หาร n (4) $Z=\frac{\text{ค่า}-\text{mean}}{\text{SD}}$ เปิดตาราง
+(1) ถามผลรวม $S_n$ (จำนวนทั้งหมด) หรือค่าเฉลี่ย $\bar X$ (สัดส่วน/ค่าเฉลี่ย) (2) หา μ, σ² ของข้อมูล 1 ตัว (Bernoulli: p, p(1−p)) (3) คูณ/หาร n (4) $Z=\dfrac{\text{ค่า}-\text{mean}}{\text{SD}}$ เปิดตาราง
 
 </Tip>
 
 - เหรียญ 100 ครั้ง หัว > 55: $S\approx N(50,5^2)$ → $P(Z>1)\approx$ **0.16** · Maxwell > 60 หน้า → $P(Z>2)=$ 0.023 · เต๋า 100 ลูก รวม > 380: μ = 3.5, σ² = 35/12 → $N(350,17.08^2)$ → $P(Z>1.76)=$ 0.039 · หลอดไฟ Exp mean 100, n = 36, $\bar X>110$: SE = 100/6 → $P(Z>0.6)=$ 0.274
 - **Continuity correction** (S เป็นจำนวนเต็ม): $P(X>40)=P(X\ge41)$ → ใช้ **40.5** · $P(X\ge40)$ → 39.5 · $P(X\lt 40)$ → 39.5 · HW10 (n = 100, p = 0.3, μ = 30, σ = 4.583): ไม่ correct 0.0146, correct 0.0110, ค่าจริง 0.0125 (หางคลาดได้มาก + Binomial เบ้ขวา)
-- **HW12 ข้อ 6:** $\frac1n\sum(X_i-\bar X)^2=\overline{X^2}-\bar X^2\to E[X^2]-\mu^2=\sigma^2$ (LLN สองครั้ง) และ $s^2=\frac{n}{n-1}\hat\sigma^2$ ก็ลู่เข้าเหมือนกัน
+- **HW12 ข้อ 6:** $\dfrac1n\sum(X_i-\bar X)^2=\overline{X^2}-\bar X^2\to E[X^2]-\mu^2=\sigma^2$ (LLN สองครั้ง) และ $s^2=\dfrac{n}{n-1}\hat\sigma^2$ ก็ลู่เข้าเหมือนกัน
 
 ### Confidence interval (CI)
 
-- **ทั่วไป:** $\bar X\pm z_{\alpha/2}\frac{\sigma}{\sqrt n}$ (90% → 1.645, 95% → 1.96 (สไลด์ปัด 2), 99% → 2.576) มาจาก “$\bar X$ ห่าง μ ไม่เกิน 2SE ⇔ μ ห่าง $\bar X$ ไม่เกิน 2SE”
-- **โพล worst case (สไลด์):** Bernoulli $\sigma^2=p(1-p)\le\frac14$ → 95% CI $=\bar X\pm\frac{1}{\sqrt n}$ · margin $e$ ต้องใช้ $n\ge 1/e^2$ (±5% → 400, ±3.3% → 900, ±2% → 2,500, ±1% → 10,000)
+- **ทั่วไป:** $\bar X\pm z_{\alpha/2}\dfrac{\sigma}{\sqrt n}$ (90% → 1.645, 95% → 1.96 (สไลด์ปัด 2), 99% → 2.576) มาจาก “$\bar X$ ห่าง μ ไม่เกิน 2SE ⇔ μ ห่าง $\bar X$ ไม่เกิน 2SE”
+- **โพล worst case (สไลด์):** Bernoulli $\sigma^2=p(1-p)\le\dfrac14$ → 95% CI $=\bar X\pm\dfrac{1}{\sqrt n}$ · margin $e$ ต้องใช้ $n\ge 1/e^2$ (±5% → 400, ±3.3% → 900, ±2% → 2,500, ±1% → 10,000)
 - **แทน $\hat p$:** $\hat p\pm z\sqrt{\hat p(1-\hat p)/n}$ (แคบกว่า worst case เสมอ)
-- ตัวอย่าง: แฮมสเตอร์ 240/400 → $0.6\pm\frac1{20}=[0.55,0.65]$ · **2024 ข้อ 1.3** หัว 21/30: $\hat p=0.7$; worst case $0.7\pm\frac{1}{\sqrt{30}}=0.7\pm0.183\to[0.517,0.883]$; แทน $\hat p$: $0.7\pm1.96\sqrt{\frac{0.21}{30}}=0.7\pm0.164\to[0.536,0.864]$ (บอกว่าใช้แบบไหน)
+- ตัวอย่าง: แฮมสเตอร์ 240/400 → $0.6\pm\dfrac1{20}=[0.55,0.65]$ · **2024 ข้อ 1.3** หัว 21/30: $\hat p=0.7$; worst case $0.7\pm\dfrac{1}{\sqrt{30}}=0.7\pm0.183\to[0.517,0.883]$; แทน $\hat p$: $0.7\pm1.96\sqrt{\dfrac{0.21}{30}}=0.7\pm0.164\to[0.536,0.864]$ (บอกว่าใช้แบบไหน)
 
 <Warn title="ความหมาย 95% CI (ออกบ่อย)">
 
@@ -193,7 +193,7 @@ $\int_0^1 c\sqrt x\,dx=\frac{2c}{3}=1\Rightarrow c=\frac32$ · $E[X]=\int_0^1 x\
 คอมสุ่มได้แค่ $U(0,1)$ → 1) อินทิเกรต pdf ได้ $F$ 2) ตั้ง $p=F(x)$ แก้หา $x=F^{-1}(p)$ (เลือกรากให้อยู่ในช่วง) · ได้ผลเพราะช่วงที่ F ชัน (pdf สูง) รับ p กว้าง x จึงตกบ่อย
 
 - $f=2x$ บน [0,1] → $F=x^2$ → $x=\sqrt p$ · $f=3x^2$ → $x=p^{1/3}$ (p = 0.125 → 0.5)
-- Exp: $x=-\frac{\ln(1-p)}{\lambda}$ (λ = 1, p = 0.632 → x ≈ 1) · T(0,1): $u\le\frac12\Rightarrow x=\sqrt{u/2}$, $u>\frac12\Rightarrow x=1-\sqrt{(1-u)/2}$
+- Exp: $x=-\dfrac{\ln(1-p)}{\lambda}$ (λ = 1, p = 0.632 → x ≈ 1) · T(0,1): $u\le\dfrac12\Rightarrow x=\sqrt{u/2}$, $u>\dfrac12\Rightarrow x=1-\sqrt{(1-u)/2}$
 
 ### Likelihood และ MLE
 
@@ -208,20 +208,20 @@ $\int_0^1 c\sqrt x\,dx=\frac{2c}{3}=1\Rightarrow c=\frac32$ · $E[X]=\int_0^1 x\
 | โมเดล | log-likelihood | MLE |
 |---|---|---|
 | Bernoulli/Binomial (k จาก n) | $k\ln\theta+(n-k)\ln(1-\theta)$ | $\hat p=k/n$ |
-| Geometric (#ล้มเหลว $k_i$) | $\sum k_i\ln(1-p)+n\ln p$ | $\frac{\#\text{สำเร็จ}}{\#\text{ครั้งที่ลองทั้งหมด}}$ |
-| Exponential | $n\ln\lambda-\lambda\sum x_i$ | $\hat\lambda=\frac{n}{\sum x_i}=\frac1{\bar x}$ |
+| Geometric (#ล้มเหลว $k_i$) | $\sum k_i\ln(1-p)+n\ln p$ | $\dfrac{\#\text{สำเร็จ}}{\#\text{ครั้งที่ลองทั้งหมด}}$ |
+| Exponential | $n\ln\lambda-\lambda\sum x_i$ | $\hat\lambda=\dfrac{n}{\sum x_i}=\dfrac1{\bar x}$ |
 | Poisson | $\sum x_i\ln\lambda-n\lambda$ | $\hat\lambda=\bar x$ |
-| Normal | $-\sum\frac{(x_i-\mu)^2}{2\sigma^2}+\dots$ | $\hat\mu=\bar x$, $\hat\sigma^2=\frac1n\sum(x_i-\bar x)^2$ (biased) |
+| Normal | $-\sum\dfrac{(x_i-\mu)^2}{2\sigma^2}+\dots$ | $\hat\mu=\bar x$, $\hat\sigma^2=\dfrac1n\sum(x_i-\bar x)^2$ (biased) |
 
-- Maxwell อ่านเร็ว 55/100: $\frac{55}{\theta}-\frac{45}{1-\theta}=0$ → 0.55 · เครื่องจักร Exp อายุ 2,3,1,3,4: $5\ln\lambda-13\lambda$ → $\frac{5}{13}\approx0.385$ · Cappy สำเร็จครั้งที่ 1,1,3 → ล้มเหลว 0,0,2 → $L=p^3(1-p)^2$ → 3/5 · Poisson 2,0,3,1 → 1.5
-- **2024 ข้อ 5 (เหรียญ + เต๋าผสม)** หัว → เต๋า A (1/6 ทุกหน้า), ก้อย → B (คี่ 1/9 คู่ 2/9): total probability $P(\text{คี่หนึ่งหน้า})=\frac p6+\frac{1-p}9=\frac{2+p}{18}$, $P(\text{คู่})=\frac{4-p}{18}$ · คี่ออก 3+2+4 = 9, คู่ 4+5+4 = 13 → $\ell=9\ln(2+p)+13\ln(4-p)$ → $\frac9{2+p}=\frac{13}{4-p}$ → $\hat p=\frac{10}{22}=\mathbf{\frac5{11}}\approx0.455$
-- **HW11 ข้อ 1** $y_2\sim N(\alpha y_1,\sigma^2)$, $y_1\sim N(\alpha y_0,\sigma^2)$: Normal variance เท่ากัน = least squares $\min(y_2-\alpha y_1)^2+(y_1-\alpha y_0)^2$ → $\hat\alpha=\frac{y_1(y_0+y_2)}{y_0^2+y_1^2}$ (ไม่ขึ้นกับ σ², λ)
+- Maxwell อ่านเร็ว 55/100: $\dfrac{55}{\theta}-\dfrac{45}{1-\theta}=0$ → 0.55 · เครื่องจักร Exp อายุ 2,3,1,3,4: $5\ln\lambda-13\lambda$ → $\dfrac{5}{13}\approx0.385$ · Cappy สำเร็จครั้งที่ 1,1,3 → ล้มเหลว 0,0,2 → $L=p^3(1-p)^2$ → 3/5 · Poisson 2,0,3,1 → 1.5
+- **2024 ข้อ 5 (เหรียญ + เต๋าผสม)** หัว → เต๋า A (1/6 ทุกหน้า), ก้อย → B (คี่ 1/9 คู่ 2/9): total probability $P(\text{คี่หนึ่งหน้า})=\dfrac p6+\dfrac{1-p}9=\dfrac{2+p}{18}$, $P(\text{คู่})=\dfrac{4-p}{18}$ · คี่ออก 3+2+4 = 9, คู่ 4+5+4 = 13 → $\ell=9\ln(2+p)+13\ln(4-p)$ → $\dfrac9{2+p}=\dfrac{13}{4-p}$ → $\hat p=\dfrac{10}{22}=\mathbf{\dfrac5{11}}\approx0.455$
+- **HW11 ข้อ 1** $y_2\sim N(\alpha y_1,\sigma^2)$, $y_1\sim N(\alpha y_0,\sigma^2)$: Normal variance เท่ากัน = least squares $\min(y_2-\alpha y_1)^2+(y_1-\alpha y_0)^2$ → $\hat\alpha=\dfrac{y_1(y_0+y_2)}{y_0^2+y_1^2}$ (ไม่ขึ้นกับ σ², λ)
 - **ตัวประมาณที่ดี:** bias ต่ำ (unbiased $E[\hat\theta]=\theta$, ไม่เอียงอย่างเป็นระบบ) + variance ต่ำ (ไม่แกว่งเมื่อเปลี่ยนชุดข้อมูล) · MLE: **consistent**, asymptotically unbiased, asymptotically minimal variance · $s^2$ หาร **n − 1** = unbiased
 
 ### MAP (Bayesian)
 
 $$
-\underbrace{P(\theta\mid D)}_{\text{posterior}}=\frac{\overbrace{P(D\mid\theta)}^{\text{likelihood}}\,\overbrace{P(\theta)}^{\text{prior}}}{P(D)},\qquad P(D)=\sum_\theta P(D\mid\theta)P(\theta)
+\underbrace{P(\theta\mid D)}_{\text{posterior}}=\dfrac{\overbrace{P(D\mid\theta)}^{\text{likelihood}}\,\overbrace{P(\theta)}^{\text{prior}}}{P(D)},\qquad P(D)=\sum_\theta P(D\mid\theta)P(\theta)
 $$
 
 $$
@@ -256,7 +256,7 @@ $$
 | ไม่ reject | ✅ 1 − α | **Type II** (false negative) = β |
 
 - **Power** $=P(\text{reject}\mid H_A)$ ตั้งเป้า 0.8 · ลด α → power ลด · **เพิ่ม power โดยไม่เพิ่ม α:** เพิ่ม n, ลด noise σ, effect ใหญ่ขึ้น (หรือใช้ paired / one-sided)
-- **Effect size (Cohen's d)** $=\frac{\lvert\mu_1-\mu_2\rvert}{\sigma}$ · $t=\frac{\text{signal}}{\text{noise}}=\frac{\bar x-\mu_0}{s/\sqrt n}\approx d\sqrt n$
+- **Effect size (Cohen's d)** $=\dfrac{\lvert\mu_1-\mu_2\rvert}{\sigma}$ · $t=\dfrac{\text{signal}}{\text{noise}}=\dfrac{\bar x-\mu_0}{s/\sqrt n}\approx d\sqrt n$
 - **เลือก α ตามราคาของการผิด:** Type I แพงกว่า → α เล็ก (ลายนิ้วมือ: คนบริสุทธิ์ติดคุก → 0.01) · Type II แพงกว่า → α ใหญ่ได้เพื่อเพิ่ม power (ช็อกโกแลต cocoa ≥ 72%: ทิ้งล็อตดีแค่เสียของ, ปล่อยล็อตเสียเสียชื่อ → 0.1) เขียนให้ครบ: Type I คือ…ราคา… / Type II คือ…ราคา… / สรุป α
 - Power ตัวอย่างเหรียญ $H_0$: θ = 0.5, n = 10 reject 0–2, 8–10 (α ≈ 0.11): θ จริง 0.1 → power 0.9, θ 0.4 → 0.2, n = 1000 → ≈ 1
 
@@ -281,20 +281,21 @@ $$
 
 | Test (ใช้เมื่อ) | Statistic | Null dist. |
 |---|---|---|
-| **Z-test** mean vs $\mu_0$, **รู้ σ** | $z=\frac{\bar x-\mu_0}{\sigma/\sqrt n}$ | $N(0,1)$ |
-| **One-sample t** ไม่รู้ σ | $t=\frac{\bar x-\mu_0}{s/\sqrt n}$, $s^2=\frac{\sum(x_i-\bar x)^2}{n-1}$ | $t(n-1)$ |
-| **Two-sample t** 2 กลุ่ม**อิสระ** σ เท่ากัน | $t=\frac{\bar x-\bar y}{s_p\sqrt{1/n+1/m}}$ | $t(n+m-2)$ |
-| **Paired t** ข้อมูลเป็นคู่ | $w_i=x_i-y_i$, $t=\frac{\bar w}{s_w/\sqrt n}$ | $t(n-1)$ |
-| **สัดส่วน vs $p_0$** (โพล) | $z=\frac{\hat p-p_0}{\sqrt{p_0(1-p_0)/n}}$ | $N(0,1)$ |
-| **Two-proportion z** 2 กลุ่ม 0/1 | $z=\frac{\hat p_1-\hat p_2}{\sqrt{\hat p(1-\hat p)(1/n_1+1/n_2)}}$ | $N(0,1)$ |
-| **χ² goodness of fit** นับในหมวด | $\sum\frac{(O-E)^2}{E}$ | $\chi^2(k-1)$ |
-| **McNemar** 0/1 เป็นคู่ (ก่อน-หลัง) | $\frac{(B-C)^2}{B+C}$ | $\chi^2(1)$ |
+| **Z-test** mean vs $\mu_0$, **รู้ σ** | $z=\dfrac{\bar x-\mu_0}{\sigma/\sqrt n}$ | $N(0,1)$ |
+| **One-sample t** ไม่รู้ σ | $t=\dfrac{\bar x-\mu_0}{s/\sqrt n}$, $s^2=\dfrac{\sum(x_i-\bar x)^2}{n-1}$ | $t(n-1)$ |
+| **Two-sample t** 2 กลุ่ม**อิสระ** σ เท่ากัน | $t=\dfrac{\bar x-\bar y}{s_p\sqrt{1/n+1/m}}$ | $t(n+m-2)$ |
+| **Paired t** ข้อมูลเป็นคู่ | $w_i=x_i-y_i$, $t=\dfrac{\bar w}{s_w/\sqrt n}$ | $t(n-1)$ |
+| **สัดส่วน vs $p_0$** (โพล) | $z=\dfrac{\hat p-p_0}{\sqrt{p_0(1-p_0)/n}}$ | $N(0,1)$ |
+| **Two-proportion z** 2 กลุ่ม 0/1 | $z=\dfrac{\hat p_1-\hat p_2}{\sqrt{\hat p(1-\hat p)(1/n_1+1/n_2)}}$ | $N(0,1)$ |
+| **χ² goodness of fit** นับในหมวด | $\sum\dfrac{(O-E)^2}{E}$ | $\chi^2(k-1)$ |
+| **McNemar** 0/1 เป็นคู่ (ก่อน-หลัง) | $\dfrac{(B-C)^2}{B+C}$ | $\chi^2(1)$ |
 | **Wilcoxon signed-rank** คู่ แต่ไม่ normal | $W_-$ = ผลรวมอันดับของ $\lvert d\rvert$ ที่ติดลบ | นับ pattern |
 | **Fisher transformation** correlation r | $z=\operatorname{atanh}(r)\sqrt{n-3}$ | $N(0,1)$ |
 
-- **Pooled variance** $s_p^2=\frac{(n-1)s_x^2+(m-1)s_y^2}{n+m-2}$ · **pooled p** $\hat p=\frac{x_1+x_2}{n_1+n_2}$ · $\operatorname{atanh}r=\frac12\ln\frac{1+r}{1-r}$
+- **Pooled variance** $s_p^2=\dfrac{(n-1)s_x^2+(m-1)s_y^2}{n+m-2}$ · **pooled p** $\hat p=\dfrac{x_1+x_2}{n_1+n_2}$
+- **Fisher:** $\operatorname{atanh}r=\dfrac12\ln\dfrac{1+r}{1-r}$ แล้วคูณ $\sqrt{n-3}$ ได้ z
 - **Two-proportion ใช้ได้เมื่อ**แต่ละกลุ่มคาดว่ามีทั้ง “ใช่” และ “ไม่ใช่” **≥ 5** ไม่งั้นใช้ exact test (Fisher's exact)
-- **Wilcoxon** n ใหญ่: $z=\frac{W_- - n(n+1)/4}{\sqrt{n(n+1)(2n+1)/24}}$ · ไม่ต้องสมมติ normal (ใช้ rank)
+- **Wilcoxon** n ใหญ่: $z=\dfrac{W_- - n(n+1)/4}{\sqrt{n(n+1)(2n+1)/24}}$ · ไม่ต้องสมมติ normal (ใช้ rank)
 - **อื่นๆ:** ANOVA (mean > 2 กลุ่ม, อย่าทำ t ทีละคู่) · Welch's t (variance ไม่เท่า) · Shapiro-Wilk (normality) · Levene (variance เท่ากัน) · χ² homogeneity, likelihood-ratio
 
 | χ² crit. | df 1 | 2 | 3 | 4 | 5 |
@@ -311,21 +312,21 @@ $$
 
 ### ตัวอย่างพร้อมคำตอบ (เช็กเลข)
 
-- **Z ข้าว** $N(7000,150^2)$, 15 แปลง $\bar x=7077$, beat → one-sided: $z=\frac{77}{150/\sqrt{15}}=1.988>1.645$ → reject
+- **Z ข้าว** $N(7000,150^2)$, 15 แปลง $\bar x=7077$, beat → one-sided: $z=\dfrac{77}{150/\sqrt{15}}=1.988>1.645$ → reject
 - **t ส่วนสูง** 153 vs 280 คน $\bar x=156$, s = 10.02: $t=5.011$ df 279 ≫ 1.65 → reject
 - **t เว็บ (HW11 ข้อ 2)** $\bar x-\mu_0=138.19$, s = 120, n = 10: $t=3.64\lt t_{0.001,9}=4.297$ → ไม่ reject · หา n ใหม่ต้องเทียบ t ที่ df = n − 1 ทีละค่า (**ห้ามใช้ z**) → n = 13
-- **2-sample GCC vs Clang** (two-sided): $\bar x=12.96$, $\bar y=12.10$, $s_p^2=0.1065$, $t=\frac{0.86}{0.2064}=4.17>t_{0.025,8}=2.306$ → ต่าง
+- **2-sample GCC vs Clang** (two-sided): $\bar x=12.96$, $\bar y=12.10$, $s_p^2=0.1065$, $t=\dfrac{0.86}{0.2064}=4.17>t_{0.025,8}=2.306$ → ต่าง
 - **2-sample ร้าน A/B** α 0.1 one-sided: $s_p^2=49.38$, $t=0.685\lt1.356$ ไม่ reject · ข้อมูลซ้ำ 4 รอบ (n = 28) $t=1.452>1.30$ reject (n ↑ SE ↓)
-- **2024 ข้อ 4 heat sink** A 78.5 vs B 76.5, $s_p^2=4.722$, df 18: $t=\frac{2}{0.972}=2.058$ · one-sided ($t_{0.05,18}=1.734$) reject · two-sided ($t_{0.025,18}=2.101$) **inconclusive** → เก็บข้อมูลเพิ่ม, ลด noise, เช็ก assumption, อย่าสรุปว่าไม่ต่าง
+- **2024 ข้อ 4 heat sink** A 78.5 vs B 76.5, $s_p^2=4.722$, df 18: $t=\dfrac{2}{0.972}=2.058$ · one-sided ($t_{0.05,18}=1.734$) reject · two-sided ($t_{0.025,18}=2.101$) **inconclusive** → เก็บข้อมูลเพิ่ม, ลด noise, เช็ก assumption, อย่าสรุปว่าไม่ต่าง
 - **ร้านกาแฟ (W5–W7)** 1.8 vs 1.6, $s_1^2=0.7$, $s_2^2=0.8$, $s_p^2=0.75$: $t=0.365\lt2.306$ → ไม่ต่าง · ต้องรายงาน SD/n/CI ไม่ใช่แค่ mean · ช่วงเวลาที่ไปเป็น confounder, n = 5 power ต่ำ, ปัดเป็นนาที
-- **Paired** ผลต่าง 40,40,−5,90,40,20: $\bar w=37.5$, $s_w=31.26$, $t=2.94>t_{0.05,5}=2.015$ (p = 0.016) · Wilcoxon: $W_-=1$, $P=\frac{2}{64}=0.031$
+- **Paired** ผลต่าง 40,40,−5,90,40,20: $\bar w=37.5$, $s_w=31.26$, $t=2.94>t_{0.05,5}=2.015$ (p = 0.016) · Wilcoxon: $W_-=1$, $P=\dfrac{2}{64}=0.031$
 - **Two-proportion ยา A** 31/40 vs 30/40: $\hat p=0.7625$, SE = 0.0952, z = 0.263 (p = 0.396) · **ยา B** 5/5 vs 30/40: z = 1.268 (p = 0.102) แต่กลุ่มยาคาดว่าตายแค่ 1.1 คน \< 5 → ใช้ z ไม่ได้ → ไม่ควรเชื่อทั้งคู่
 - **2024 ข้อ 2 โพล** $H_0$: p = 0.5106, two-sided α 0.1 → ±1.645: z = 0.56, −0.92, 1.54 → **ไม่มีโพลไหน biased**
 - **2024 ข้อ 1.5 IQ** z-test (รู้ σ = 15), $\bar x=1000/10=100$ → z = 0 → **p = 0.5** (one-sided; two-sided = 1)
 - **2024 ข้อ 3 ช็อกโกแลต 10 รส** one-sample t one-sided ($H_A$: μ > 8.5) df 4: มีแค่รส 10 ($\bar x=9.4$, s = 0.548) $t=3.67$ (p ≈ 0.011) > 2.132 แต่ทดสอบ 10 รส → Bonferroni α = 0.005, crit 4.604 → **ไม่ผ่าน** · เลือก 1 รส → รส 10 (หลักฐานยังไม่แข็ง ควรเก็บเพิ่ม) · เลือก 3 รส → ไม่มีรสอื่นเกิน 8.5 เลย ไม่มีหลักฐานรองรับ
 - **ลูกเต๋าคาสิโน (HW11 ข้อ 5)** $H_A$: p \< 1/6 (one-sided ซ้าย, โกงทางเดียว) · ออก 3/30: p-value $=P(X\le3)=0.240$ ไม่ reject · n = 200, α 0.1: Binomial $P(X\le26)=0.0945$ → reject $X\le26$ (Normal: $33.33-1.2816(5.27)=26.58$ ได้เท่ากัน) · **power ต่ำกว่า α ไม่ได้**
 - **โรงงาน (HW11 ข้อ 7)** รวม 120 วัน z = 4.24 reject · แยกโรงละ 30 วัน SE ใหญ่ 2 เท่า → โรง 3 ไม่ผ่าน (ไม่ได้แปลว่าไม่ดีขึ้น) · t ให้ข้อสรุปเดียวกัน · 4 tests → ควรพูดถึง Bonferroni
-- **McNemar index** B = 9 (fail→pass), C = 2: $\frac{49}{11}=4.45>3.841$ · exact $P(X\le2\mid11,0.5)=\frac{67}{2048}=0.033$ · **χ² GoF** หน้าเว็บ 3 แบบ 300 คน: E = 100/แบบ, df 2 · **Fisher** r = 0.5, n = 28: z = 0.549 × 5 = 2.75 (p = 0.003)
+- **McNemar index** B = 9 (fail→pass), C = 2: $\dfrac{49}{11}=4.45>3.841$ · exact $P(X\le2\mid11,0.5)=\dfrac{67}{2048}=0.033$ · **χ² GoF** หน้าเว็บ 3 แบบ 300 คน: E = 100/แบบ, df 2 · **Fisher** r = 0.5, n = 28: z = 0.549 × 5 = 2.75 (p = 0.003)
 - **แอร์ใหม่นิ่งกว่า (HW11 ข้อ 6)** ทดสอบ **SD** ไม่ใช่ mean: $H_0$: σ = 0.5 vs $H_A$: σ \< 0.5 (+เช็ก μ = 15) · assumption: log จากห้องเหมือนกัน, อิสระ, normal, ไม่ cherry-pick
 
 ## กับดัก p-value + Multiple testing
@@ -346,7 +347,7 @@ $$
 
 - $m$ tests ที่ $H_0$ จริงหมด: คาดว่า false positive **$m\alpha$** ครั้ง (4,000 × 0.05 = 200; ทดสอบทุกวัน 60 วัน → 3 วัน) · $P(\ge1\text{ FP})=1-(1-\alpha)^m$ (m = 20 → 0.64, m = 4 → 0.185)
 - **FWER (คุมโอกาสผิดแม้แต่ 1)**: **Bonferroni** $\alpha/m$ (ง่าย แต่ conservative, power หาย) · **Šidák** $1-(1-\alpha)^{1/m}$ (m = 10: 0.005 vs 0.005116)
-- **FDR** $E[\frac{\text{false discoveries}}{\text{discoveries}}]\le q$ ด้วย **Benjamini-Hochberg**: เรียง p น้อย→มาก, เทียบ $p_i\le q\cdot\frac im$, หา **i ที่ใหญ่ที่สุดที่ผ่าน** → ทุกตัวที่ p ≤ ตัวนั้น significant (**ไม่หยุดที่ตัวแรกที่ไม่ผ่าน**)
+- **FDR** $E[\dfrac{\text{false discoveries}}{\text{discoveries}}]\le q$ ด้วย **Benjamini-Hochberg**: เรียง p น้อย→มาก, เทียบ $p_i\le q\cdot\dfrac im$, หา **i ที่ใหญ่ที่สุดที่ผ่าน** → ทุกตัวที่ p ≤ ตัวนั้น significant (**ไม่หยุดที่ตัวแรกที่ไม่ผ่าน**)
 
 | p | 0.003 | 0.023 | 0.027 | 0.045 | 0.053 |
 |---|---|---|---|---|---|
@@ -390,21 +391,21 @@ $$
 ไม่ตั้งจุดหยุดก่อน → รันนานพอ z ไหลข้ามเส้นได้เอง · **MDE** = ความต่างเล็กสุดที่คุ้มจะตรวจ (ตัดสินใจทางธุรกิจ) ผูกกับ d, power, α
 
 $$
-n=\frac{m+1}{m}\left(\frac{(z_\alpha+z_\beta)\,\sigma}{\text{MDE}}\right)^2 \text{ (ควบคุม)},\quad mn \text{ (ทดลอง)}
+n=\dfrac{m+1}{m}\left(\dfrac{(z_\alpha+z_\beta)\,\sigma}{\text{MDE}}\right)^2 \text{ (ควบคุม)},\quad mn \text{ (ทดลอง)}
 $$
 
 $$
-\text{50/50 } (m=1):\quad n=2\left(\frac{(z_\alpha+z_\beta)\,\sigma}{\text{MDE}}\right)^2 \text{ ต่อกลุ่ม}
+\text{50/50 } (m=1):\quad n=2\left(\dfrac{(z_\alpha+z_\beta)\,\sigma}{\text{MDE}}\right)^2 \text{ ต่อกลุ่ม}
 $$
 
-- มาจาก critical value ห่าง 0 เป็น $z_\alpha$ SE และห่าง MDE เป็น $z_\beta$ SE: $z_\alpha+z_\beta=\frac{\text{MDE}}{\sigma\sqrt{1/n+1/(mn)}}$
+- มาจาก critical value ห่าง 0 เป็น $z_\alpha$ SE และห่าง MDE เป็น $z_\beta$ SE: $z_\alpha+z_\beta=\dfrac{\text{MDE}}{\sigma\sqrt{1/n+1/(mn)}}$
 - $z_\alpha=\Phi^{-1}(1-\alpha)$ (**หางเดียว**; two-sided ใช้ $z_{\alpha/2}$) · $z_\beta=\Phi^{-1}(1-\beta)$: power 0.8 → 0.842, power 0.5 → 0 · **m = ทดลอง ÷ ควบคุม**: 50/50 → 1, 33/67 → 2, 80/20 → **0.25** · σ² = p(1 − p) ของ**คนเดียว** ใช้ p เดิม · MDE absolute: 10% → 11% คือ 0.01 · **ปัดขึ้นเสมอ**
 
 | กรณี | ค่า | n ต่อกลุ่ม |
 |---|---|---|
-| p 0.10, MDE 0.01, α 0.05 (1 หาง), 0.8, 50/50 | $2\cdot\frac{6.183\cdot0.09}{0.0001}$ | 11,129 (สไลด์ 11,128) |
+| p 0.10, MDE 0.01, α 0.05 (1 หาง), 0.8, 50/50 | $2\cdot\dfrac{6.183\cdot0.09}{0.0001}$ | 11,129 (สไลด์ 11,128) |
 | p 0.10, MDE 0.02, เหมือนเดิม | 50/50 / 80/20 | 2,783 / 6,956 + 1,739 |
-| **HW12 ข้อ 9** p 0.11, MDE 0.01, α 0.15, 0.8, 80/20 | $5\cdot\frac{(1.036+0.842)^2\cdot0.0979}{0.0001}$ | **17,266 + 4,317** |
+| **HW12 ข้อ 9** p 0.11, MDE 0.01, α 0.15, 0.8, 80/20 | $5\cdot\dfrac{(1.036+0.842)^2\cdot0.0979}{0.0001}$ | **17,266 + 4,317** |
 | p 0.20 → 0.22, two-sided 0.05, 0.8 / 0.5 | $(1.96+0.842)^2$ / $1.96^2$ | 6,280 / 3,074 |
 
 - **A/A test:** แบ่ง control vs control ดูว่าความต่างจากความสุ่มล้วนๆ ใหญ่แค่ไหน (~±0.002) → ประมาณ variance + ตั้ง MDE ไม่ให้เล็กกว่า noise
@@ -437,7 +438,7 @@ $$
 - **6.1** เปิด B อย่างเดียวแล้วเทียบช่วงก่อน = ไม่มี control ช่วงเวลาเดียวกัน → seasonality, เทรนด์, ข่าว, แหล่งผู้ชมเปลี่ยน = confounder
 - **6.2** เป้าหมายจริง = **กำไรต่อผู้ชม**: A = 0.01(10,000) + 0.99(10) = **109.9** · B = 10,000q + 5(1 − q) ≥ 109.9 → **q ≥ 1.0495%** → วัด downline conversion = # downline / # ผู้ชม (attribution ครอบคลุมเวลาตัดสินใจ)
 - **6.3** สุ่มตาม account/cookie, 80/20 ถ้ากลัวเสียกำไร, คุมช่องทางที่มา/เวลา, ระวัง downline ชวนกันข้ามกลุ่ม · **6.4** Bernoulli → two-proportion z one-sided (กำไรต่อคนเบ้มาก ไม่ normal)
-- **6.5** MDE = 0.0005 (จุดคุ้มทุน), σ² = 0.01 × 0.99, α 0.05, power 0.8: $n=2\cdot\frac{6.183\cdot0.0099}{0.0005^2}\approx$ **489,700/กลุ่ม** (base rate ต่ำ + MDE เล็ก) ถ้าไม่ไหวเพิ่ม MDE/ลด power, ≥ 1 สัปดาห์, ห้าม peek
+- **6.5** MDE = 0.0005 (จุดคุ้มทุน), σ² = 0.01 × 0.99, α 0.05, power 0.8: $n=2\cdot\dfrac{6.183\cdot0.0099}{0.0005^2}\approx$ **489,700/กลุ่ม** (base rate ต่ำ + MDE เล็ก) ถ้าไม่ไหวเพิ่ม MDE/ลด power, ≥ 1 สัปดาห์, ห้าม peek
 
 ### โจทย์ฝึก + การบ้าน A/B
 

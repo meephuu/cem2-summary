@@ -62,7 +62,7 @@
 /* ---------- Print: A4, 3 columns, ≤ 4 pages ---------- */
 @page cheat {
   size: A4 portrait;
-  margin: 6mm 6mm 6.5mm;
+  margin: 5mm 5mm 5.5mm;
 }
 
 @media print {
@@ -94,7 +94,7 @@
     background: #fff;
     color: #000;
     font-size: var(--cs-size);
-    line-height: 1.2;
+    line-height: 1.15;
   }
   html[data-page='cheat-sheet'] [data-noprint] {
     display: none !important;
@@ -134,10 +134,10 @@
 
   .prose.cheat {
     column-count: var(--cs-cols);
-    column-gap: 4mm;
+    column-gap: 3mm;
     column-rule: 0.4pt solid #c9ccd3;
     font-size: var(--cs-size);
-    line-height: 1.2;
+    line-height: 1.15;
     orphans: 2;
     widows: 2;
   }
