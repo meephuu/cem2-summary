@@ -38,7 +38,7 @@ HW12 เฉลยครบในส่วน H ของบท 4 (ข้อ 1–
 - สไตล์อยู่ที่ `src/styles/cheatsheet.css` (บนจอ = `.prose.cheat` แน่นขึ้น · พิมพ์ = `html[data-page='cheat-sheet']` A4 2 คอลัมน์, `--cs-size: 8pt`)
 - ต้องพิมพ์ได้ ≤ 4 หน้า (2 แผ่นหน้า-หลัง) ตอนนี้ได้ ~3.75 หน้า ถ้าเพิ่มเนื้อหาต้องเช็กจำนวนหน้าใหม่ (Playwright `page.pdf(prefer_css_page_size=True)`)
 - ระวัง: อะไรที่กว้างเกินคอลัมน์ (สูตร display ยาว, ตารางที่ห้ามตัดบรรทัด) ทำให้ Chrome ย่อทั้งหน้าตอนพิมพ์ → เช็ก `scrollWidth` = 748 ที่ viewport 748 + print media
-- ปุ่ม 🖨️ (`PrintButton`) เรียก `window.print()` · element ที่มี `data-noprint` ถูกซ่อนตอนพิมพ์หน้านี้
+- ปุ่ม “ดาวน์โหลด PDF” (`DownloadPdfButton`) ลิงก์ไป `./cem2-cheat-sheet.pdf` ซึ่ง GitHub Actions สร้างทุก deploy ด้วย `scripts/cheatsheet-pdf.mjs` (Playwright ติดตั้งเฉพาะใน CI) · เปิดไฟล์จากดิสก์ (file://) ปุ่มจะเปิดหน้าพิมพ์แทน · element ที่มี `data-noprint` ถูกซ่อนตอนพิมพ์หน้านี้
 
 แถบด้านซ้ายพับเก็บได้บน desktop (ปุ่มมุมขวาบนของ sidebar / ปุ่ม “เมนู” มุมซ้ายบนเพื่อเปิดกลับ) จำสถานะใน localStorage `cem2:sidebar-collapsed`
 

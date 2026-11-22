@@ -27,6 +27,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      # cheat sheet PDF for the download button (Playwright is CI-only, not in package.json)
+      - run: npm i --no-save playwright && npx playwright install --with-deps chromium
+      - run: node scripts/cheatsheet-pdf.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
