@@ -6,6 +6,7 @@ export function ReadingProgress() {
   return (
     <div
       aria-hidden
+      data-noprint
       style={{
         position: 'fixed',
         top: 0,

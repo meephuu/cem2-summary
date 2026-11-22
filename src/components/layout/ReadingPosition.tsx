@@ -80,7 +80,7 @@ export function ReadingPosition({ chapterId, article }: Props) {
 
   if (!resumed) return null
   return (
-    <div className={styles.toast} role="status">
+    <div className={styles.toast} role="status" data-noprint>
       กลับมาที่อ่านค้างไว้แล้ว
       <button
         onClick={() => {

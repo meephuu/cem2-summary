@@ -35,7 +35,7 @@ export function AppShell({ chapter, headings, children }: Props) {
   return (
     <>
       <ReadingProgress />
-      <div className={styles.topbar} data-topbar>
+      <div className={styles.topbar} data-topbar data-noprint>
         <button className={styles.menuButton} onClick={() => setOpen(true)} aria-label="เปิดเมนู">
           ☰
         </button>
@@ -45,10 +45,12 @@ export function AppShell({ chapter, headings, children }: Props) {
       </div>
       {open && <div className={styles.scrim} onClick={close} />}
       <div className={styles.layout}>
-        <aside ref={sidebarRef} className={`${styles.sidebar} ${open ? styles.open : ''}`}>{sidebar}</aside>
+        <aside data-noprint ref={sidebarRef} className={`${styles.sidebar} ${open ? styles.open : ''}`}>{sidebar}</aside>
         <main className={styles.main}>{children}</main>
       </div>
-      <DistTablesPanel />
+      <div data-noprint>
+        <DistTablesPanel />
+      </div>
     </>
   )
 }

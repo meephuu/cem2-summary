@@ -20,8 +20,10 @@ interface Props {
 /** Coloured box for definitions, worked examples, pitfalls and exam tips. */
 export function Callout({ type = 'def', title, children }: Props) {
   return (
-    <div className={`${styles.box} ${styles[type]}`}>
-      <div className={styles.title}>{title ?? CALLOUT_LABEL[type]}</div>
+    <div className={`${styles.box} ${styles[type]}`} data-callout={type}>
+      <div className={styles.title} data-callout-title>
+        {title ?? CALLOUT_LABEL[type]}
+      </div>
       <div className={styles.body}>{children}</div>
     </div>
   )

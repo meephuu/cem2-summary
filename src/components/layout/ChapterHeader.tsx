@@ -4,11 +4,13 @@ import styles from './ChapterHeader.module.css'
 
 export function ChapterHeader({ chapter }: { chapter: Chapter }) {
   return (
-    <header className={styles.header}>
+    <header className={styles.header} data-chapter-header>
       <div className={styles.kicker}>{chapterLabel(chapter)}</div>
       <h1 className={styles.title}>{chapter.title}</h1>
       {chapter.group === 'extra' ? (
-        <p className={styles.lead}>{chapter.blurb}</p>
+        <p className={styles.lead} data-noprint>
+          {chapter.blurb}
+        </p>
       ) : (
         <>
           <p className={styles.lead}>

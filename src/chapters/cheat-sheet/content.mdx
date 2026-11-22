@@ -1,1 +1,447 @@
-หน้านี้ยังไม่ได้ทำ เตรียมไว้สำหรับรวมสูตรและทิปสำคัญจากบท 0–4 ให้พร้อมจดลงโน้ต 2 แผ่น (หน้า-หลัง) เข้าห้องสอบ
+<PrintButton />
+
+รวมทุกเรื่องที่ออกไฟนอล (บท 0–4, การบ้าน HW10–12, ข้อสอบ 2024, โจทย์ฝึก) เรียงตามลำดับที่ใช้ตอบข้อสอบ ตัวเลข **(→ …)** คือคำตอบของตัวอย่างจริงจากสไลด์/การบ้าน ไว้เช็กว่าใช้สูตรถูก
+
+## Probability & Bayes
+
+### กฎพื้นฐาน
+
+- $P(A^c)=1-P(A)$ · $P(A\cup B)=P(A)+P(B)-P(A\cap B)$ · ทุกกรณีรวมกัน = 1
+- **Conditional:** $P(A\mid B)=\frac{P(A\cap B)}{P(B)}$ = รู้ว่า B เกิดแล้ว โลก “หด” เหลือแค่ B (ทอยเต๋า รู้ว่าได้คู่ → $P(\ge 4)=2/3$)
+- **กฎการคูณ:** $P(A\cap B)=P(A\mid B)P(B)=P(B\mid A)P(A)$
+- **Total probability:** $P(B)=P(B\mid A)P(A)+P(B\mid A^c)P(A^c)$
+- **Bayes (กลับด้านเงื่อนไข):** $P(A\mid B)=\dfrac{P(B\mid A)P(A)}{P(B\mid A)P(A)+P(B\mid A^c)P(A^c)}$
+- **อิสระ (independent):** $P(A\cap B)=P(A)P(B) \iff P(B\mid A)=P(B)$ (หุ้นขึ้นไม่เกี่ยวกับสีเสื้อซาร่า)
+
+<Warn title="อิสระ ≠ ไม่เกิดพร้อมกัน (mutually exclusive)">
+
+$P(A\cap B)=0$ เช่น ทอยครั้งเดียวได้ 1 กับได้ 6 → **ไม่อิสระ** เพราะรู้ว่าได้ 1 ก็รู้ทันทีว่าไม่ได้ 6
+
+</Warn>
+
+### โจทย์ตรวจโรค / AI / base rate (ออกทุกปี)
+
+แปลคำก่อน: **power** $=P(+\mid \text{ป่วย})$ · **significance α** (false positive) $=P(+\mid \text{ไม่ป่วย})$ · **base rate** $b=P(\text{ป่วย})$
+
+$$
+P(\text{ป่วยจริง}\mid +)=\frac{\text{power}\cdot b}{\text{power}\cdot b+\alpha\,(1-b)}
+$$
+
+| โจทย์ | แทนค่า | ตอบ |
+|---|---|---|
+| โรค 1%, ตรวจเจอ 90%, บวกปลอม 5% | $\frac{0.9(0.01)}{0.009+0.05(0.99)}=\frac{0.009}{0.0585}$ | 0.154 |
+| **2024 ข้อ 1.4** มะเร็ง 1/16, α = 0.01, power 0.8 | $\frac{0.8/16}{0.05+0.01(15/16)}=\frac{0.05}{0.059375}$ | **0.842** |
+| ยา 100 ตัว ได้ผลจริง 10%, power 0.8, α 0.05 | $\frac{8}{8+4.5}$ | 0.64 |
+
+วาด tree diagram ช่วยไม่ให้สับสน · ความหมายของ probability: **Frequentist** = อัตราเมื่อทำซ้ำมากๆ (θ ค่าคงที่) · **Bayesian** = ระดับความเชื่อ (θ มีการแจกแจง, มี prior)
+
+## ตัวแปรสุ่ม: pmf · pdf · cdf · E · Var
+
+### pmf / pdf / cdf
+
+- **ไม่ต่อเนื่อง (discrete):** pmf $p(x)=P(X=x)$, $\sum_x p(x)=1$
+- **ต่อเนื่อง (continuous):** pdf $f(x)$ ความน่าจะเป็น = **พื้นที่ใต้กราฟ** $P(a\le X\le b)=\int_a^b f(x)\,dx=F(b)-F(a)$ และ $\int_{-\infty}^{\infty}f=1$
+- **cdf** $F(x)=P(X\le x)=\int_{-\infty}^{x}f(t)\,dt$ · $f=F'$ · F เริ่ม 0 ไม่เคยลด จบที่ 1
+- ต่อเนื่อง: $P(X=x)=0$ ดังนั้น $\le$ กับ $\lt$ ให้ค่าเท่ากัน · **ค่า f เกิน 1 ได้** (U[0, 0.5] มี f = 2) เพราะ f ไม่ใช่ความน่าจะเป็น
+- **Quantile:** $F(q)=$ สัดส่วนที่ต้องการ · median $F(m)=0.5$ · quartile 0.25/0.5/0.75 · decile ทีละ 0.1 · Exp: $m=\ln 2/\lambda$ น้อยกว่า mean $1/\lambda$ (เบ้ขวา)
+- **หา c ใน pdf:** ตั้ง $\int f=1$ → ได้ c → อินทิเกรตหา F → ใช้ $F(b)-F(a)$
+
+### E และ Var
+
+- $E[X]=\sum x\,p(x)$ หรือ $\int x f(x)\,dx$ (ค่าเฉลี่ยถ่วงน้ำหนัก ไม่จำเป็นต้องเป็นค่าที่เกิดได้) · $E[g(X)]=\int g(x)f(x)\,dx$
+- $\mathrm{Var}(X)=E[(X-\mu)^2]=E[X^2]-(E[X])^2$ · $\sigma=\sqrt{\mathrm{Var}}$ (หน่วยเดียวกับ X)
+- $E[(X-a)^2]=\mathrm{Var}(X)+(E[X]-a)^2$ (HW10 ข้อ 10: ตั้งแอร์ μ = 15 ให้โอกาส fail เฉลี่ยต่ำสุด)
+
+| ค่าคาดหมาย | ความแปรปรวน |
+|---|---|
+| $E[aX+b]=aE[X]+b$ | $\mathrm{Var}(aX+b)=a^2\,\mathrm{Var}(X)$ (b หาย) |
+| $E[X+Y]=E[X]+E[Y]$ จริง**เสมอ** | $\mathrm{Var}(X\pm Y)=\mathrm{Var}X+\mathrm{Var}Y\pm2\mathrm{Cov}$ |
+| อิสระ: $E[XY]=E[X]E[Y]$ | อิสระ: $\mathrm{Var}(X\pm Y)=\mathrm{Var}X+\mathrm{Var}Y$ (ลบกันแต่ **Var บวก**) |
+
+ทั่วไป: $\mathrm{Var}(aX+bY)=a^2\mathrm{Var}X+b^2\mathrm{Var}Y+2ab\,\mathrm{Cov}(X,Y)$
+
+<Example title="ข้อสอบ 2024 ข้อ 1.2: f(x) = c√x บน [0, 1] จงหา E[X]">
+
+$\int_0^1 c\sqrt x\,dx=\frac{2c}{3}=1\Rightarrow c=\frac32$ · $E[X]=\int_0^1 x\cdot\frac32\sqrt x\,dx=\frac32\cdot\frac25=\mathbf{\frac35}$ · $E[X^2]=\frac32\cdot\frac27=\frac37$ → $\mathrm{Var}=\frac37-\frac{9}{25}=\frac{12}{175}\approx0.069$
+
+</Example>
+
+ตัวอย่างอื่น: $f=\frac38x^2$ บน [0,2] → $F=\frac{x^3}{8}$, E = 1.5, Var = 0.15 · ตาราง 100/150/200 (โอกาส 0.5/0.3/0.2) → E = 135, $E[X^2]=19750$, Var = 1525 · VarX = 1, VarY = 2, Cov = 0.5 → $\mathrm{Var}(2X-3Y)=4+18-6=16$ · E = 5, Var = 4 → Y = 3X − 2 มี E = 13, Var = 36
+
+### หลายตัวแปร: joint · marginal · ผลรวม
+
+- **Joint** $f_{X,Y}$: $P((X,Y)\in A)=\iint_A f\,dx\,dy$ · **Marginal** $f_X(x)=\int f_{X,Y}(x,y)\,dy$ (ตาราง: บวกแถว/คอลัมน์ เขียนที่ “ขอบ”)
+- **อิสระ** ⇔ $f_{X,Y}=f_X\,f_Y$ **ทุกช่อง** (ช่องเดียวไม่ตรง = ไม่อิสระ เช่น 0.4 × 0.3 = 0.12 ≠ 0.1)
+- **ผลรวม Z = X + Y (อิสระ):** convolution $f_Z(z)=\int f_X(x)f_Y(z-x)\,dx$ · ลูกเต๋า 2 ลูกรวม 7 = 6/36
+- **ทริค fix ตัวหนึ่ง:** $P(Z\in A)=\int f_X(x)\,P(Y\in A-x)\,dx$ ถ้า Y uniform ข้างในคือ “ความยาวที่ซ้อน ÷ ความกว้าง” แบ่งกรณีตามทิศที่ช่วงเลื่อน (HW10 ข้อ 7 → 0.5)
+- U(0,1) + U(0,1) = สามเหลี่ยมบน [0, 2] · $\frac{U_1+U_2}{2}\sim T(0,1)$: $f=4x$ / $4(1-x)$, $F=2x^2$ ($x\le\frac12$), E = ½, Var = $\frac14(\frac1{12}+\frac1{12})=\frac1{24}$
+- ผลคูณตัวแปรอิสระ $E[\prod X_i]=\prod E[X_i]$ (ราคาเหรียญ $10\times1.003^{30}\approx10.94$) แต่ผลคูณเบ้ขวา mean > median → E[return] > 0 ได้ทั้งที่โอกาสกำไร \< 50% (ขึ้น 10% แล้วลง 10% = 0.99)
+
+## Covariance · Correlation
+
+- $\mathrm{Cov}(X,Y)=E[(X-\mu_X)(Y-\mu_Y)]=E[XY]-\mu_X\mu_Y$ (> 0 ขึ้นด้วยกัน, \< 0 สวนทาง)
+- $\mathrm{Cov}(X,X)=\mathrm{Var}X$ · $\mathrm{Cov}(aX+b,cY+d)=ac\,\mathrm{Cov}(X,Y)$ · $\mathrm{Cov}(X,Y+Z)=\mathrm{Cov}(X,Y)+\mathrm{Cov}(X,Z)$
+- **Pearson** $\rho=\dfrac{\mathrm{Cov}(X,Y)}{\sqrt{\mathrm{Var}X\,\mathrm{Var}Y}}\in[-1,1]$ ไม่มีหน่วย (±1 = เส้นตรงเป๊ะ)
+
+<Tip title="หา ρ จากข้อมูล (ข้อสอบ 2024 ข้อ 1.1)">
+
+(1) $\bar x,\bar y$ (2) $\mathrm{Cov}=\overline{xy}-\bar x\bar y$ (3) $\mathrm{Var}X=\overline{x^2}-\bar x^2$, $\mathrm{Var}Y=\overline{y^2}-\bar y^2$ (4) $\rho=\mathrm{Cov}/\sqrt{\mathrm{Var}X\,\mathrm{Var}Y}$ จะหาร n หรือ n − 1 ก็ได้ ρ เท่ากัน (ตัดกันหมด) · (1,2),(2,4),(3,5): $\bar x=2$, $\bar y=\frac{11}3$, Cov = $\frac{25}3-\frac{22}3=1$, VarX = $\frac23$, VarY = $\frac{14}9$ → ρ ≈ **0.982**
+
+</Tip>
+
+<Warn title="3 ข้อระวังของ correlation">
+
+(1) วัดแค่ความสัมพันธ์**เชิงเส้น** (Anscombe: 4 ชุดหน้าตาต่างกันแต่ ρ = 0.816 เท่ากัน → plot ดูเสมอ) (2) **ρ = 0 ≠ อิสระ** (X ∈ \{−1, 0, 1\}, Y = X² → Cov = 0 ทั้งที่ Y ขึ้นกับ X) (3) **Correlation ≠ Causation** (มีตัวแปรที่สาม หรือบังเอิญ)
+
+</Warn>
+
+- **Corr(X, X + A)** (A อิสระกับ X) $=\sqrt{\frac{\mathrm{Var}X}{\mathrm{Var}X+\mathrm{Var}A}}$ · X ~ U(−1,1): A = 10 → 1, A ~ U(−1,1) → 0.707, U(−10,10) → 0.0995, U(−100,100) → 0.010 · **บวกค่าคงที่ไม่เปลี่ยน Var/Cov** → ρ ขึ้นกับ spread ไม่ขึ้นกับตำแหน่ง (HW10 ข้อ 8–9)
+- **Covariance matrix** $\Sigma_{ij}=\mathrm{Cov}(X_i,X_j)$: สมมาตร ($C=B$ เสมอ), ทแยงคือ Var **ติดลบไม่ได้**, positive semi-definite · ดู scatter: เอียงขึ้น → Cov > 0, แผ่ตามแกนไหนกว้าง Var แกนนั้นใหญ่ · $\Sigma=\begin{pmatrix}4&3\\3&9\end{pmatrix}$ → $\rho=\frac{3}{2\cdot3}=0.5$
+- **Multivariate Gaussian** $N(\boldsymbol\mu,\Sigma)$: เนินวงรี · $A\mathbf X+\mathbf b\sim N(A\boldsymbol\mu+\mathbf b,\,A\Sigma A^T)$ · เฉพาะ jointly Gaussian: **uncorrelated ⇔ independent**
+- **Portfolio:** $\mathrm{Var}(\frac12X+\frac12Y)=\frac14(\mathrm{Var}X+\mathrm{Var}Y+2\mathrm{Cov})$ → กระจายลงทุนในสินทรัพย์ที่ **Cov ต่ำ/ติดลบ** (HW10 ข้อ 11: a เดี่ยว 10, a+b 3.25, a+c 7.5, a+d 8.75 ×10⁻³)
+
+## การแจกแจงที่ต้องรู้
+
+| ไม่ต่อเนื่อง (ใช้เมื่อ) | pmf $P(X=a)$ | E | Var |
+|---|---|---|---|
+| **Bernoulli(p)** ใช่/ไม่ใช่ 1 ครั้ง | $p^a(1-p)^{1-a}$ | $p$ | $p(1-p)$ |
+| **Binomial(n,p)** นับสำเร็จใน n ครั้ง | $\binom{n}{a}p^a(1-p)^{n-a}$ | $np$ | $np(1-p)$ |
+| **Uniform** 1…n (ลูกเต๋า) | $\frac1n$ | $\frac{n+1}2$ | $\frac{n^2-1}{12}$ |
+| **Geometric(p)** #**ล้มเหลว**ก่อนสำเร็จ (0,1,…) | $(1-p)^a p$ | $\frac{1-p}p$ | $\frac{1-p}{p^2}$ |
+| **Poisson(λ)** #เหตุการณ์ต่อช่วง | $\frac{\lambda^a e^{-\lambda}}{a!}$ | $\lambda$ | $\lambda$ |
+
+| ต่อเนื่อง | pdf / cdf | E | Var |
+|---|---|---|---|
+| **Normal** $N(\mu,\sigma^2)$ ผลรวมหลายปัจจัย | $\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$ / ตาราง | $\mu$ | $\sigma^2$ |
+| **Exponential(λ)** เวลารอ, x ≥ 0 | $\lambda e^{-\lambda x}$ / $1-e^{-\lambda x}$ | $\frac1\lambda$ | $\frac1{\lambda^2}$ |
+| **Uniform(a,b)** | $\frac1{b-a}$ / $\frac{x-a}{b-a}$ | $\frac{a+b}2$ | $\frac{(b-a)^2}{12}$ |
+| **Pareto** รวยกระจุก, $x\ge x_m$ | $\frac{\alpha x_m^\alpha}{x^{\alpha+1}}$ / $1-(\frac{x_m}{x})^\alpha$ | — | อาจ ∞ |
+
+- **Geometric มี 2 นิยาม:** วิชานี้นับ #ล้มเหลว (เริ่ม 0) ถ้านับ #ครั้งที่ลองรวมครั้งสำเร็จ (เริ่ม 1) mean = $1/p$ · “สำเร็จครั้งที่ k” = ล้มเหลว k − 1
+- **Memoryless** $P(X\ge m+n\mid X\ge m)=P(X\ge n)$ มีแค่ **Geometric** และ **Exponential** · Gambler's fallacy: แดง 10 ตาติด ตาหน้าก็ยังโอกาสเท่าเดิม
+- Binomial = ผลรวม n Bernoulli · Poisson ≈ Binomial เมื่อ n ใหญ่ p เล็ก ($\lambda=np$) · Pareto Var ∞ → CLT ใช้ไม่ได้
+- **ข้อมูลแบบไหน → แจกแจงไหน (HW12 ข้อ 4):** ใช่/ไม่ใช่ (ซื้อ, เปิดเมล, fraud) → Bernoulli · เวลารอ, รายได้ต่อผู้ใช้ → Exponential · จำนวนครั้งต่อช่วง (ออร์เดอร์/นาที) → Poisson · ส่วนสูง, น้ำหนัก, error วัด → Normal/t
+
+## Normal และตาราง Φ(z)
+
+- $Z=\frac{X-\mu}{\sigma}\sim N(0,1)$ = “ห่างจาก mean กี่ SD” · $aX+b\sim N(a\mu+b,\,a^2\sigma^2)$
+- อิสระ: $X\pm Y\sim N(\mu_1\pm\mu_2,\ \sigma_1^2+\sigma_2^2)$ → **บวก Var ไม่ใช่บวก SD** (SD 3, 4 → 5 ไม่ใช่ 7)
+- 68–95–99.7 ภายใน ±1, ±2, ±3 SD · $P(Z>z)=1-\Phi(z)$ · $P(Z\lt -z)=1-\Phi(z)$ · $P(a\lt Z\lt b)=\Phi(b)-\Phi(a)$
+- ส่วนสูง $N(170,10^2)$: $P(X>185)=P(Z>1.5)=0.0668$ · $N(50,5^2)+N(30,12^2)=N(80,13^2)$: $P(>100)=P(Z>1.54)\approx0.062$
+
+**ตาราง Φ(z) = P(Z ≤ z)** (ตัด “0.” ออก เช่น 8413 = 0.8413) · z = หัวคอลัมน์ + หัวแถว เช่น z = 1.5 + 0.05 = 1.55 → 9394
+
+| เพิ่ม | 0.0 | 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | 3.0 |
+|---|---|---|---|---|---|---|---|
+| **+.00** | 5000 | 6915 | 8413 | 9332 | 9772 | 9938 | 9987 |
+| **+.05** | 5199 | 7088 | 8531 | 9394 | 9798 | 9946 | 9989 |
+| **+.10** | 5398 | 7257 | 8643 | 9452 | 9821 | 9953 | 9990 |
+| **+.15** | 5596 | 7422 | 8749 | 9505 | 9842 | 9960 | 9992 |
+| **+.20** | 5793 | 7580 | 8849 | 9554 | 9861 | 9965 | 9993 |
+| **+.25** | 5987 | 7734 | 8944 | 9599 | 9878 | 9970 | 9994 |
+| **+.30** | 6179 | 7881 | 9032 | 9641 | 9893 | 9974 | 9995 |
+| **+.35** | 6368 | 8023 | 9115 | 9678 | 9906 | 9978 | 9996 |
+| **+.40** | 6554 | 8159 | 9192 | 9713 | 9918 | 9981 | 9997 |
+| **+.45** | 6736 | 8289 | 9265 | 9744 | 9929 | 9984 | 9997 |
+
+**Quantile** $z=\Phi^{-1}(q)$: q = 0.80 → **0.842** · 0.85 → 1.036 · 0.90 → **1.282** · 0.93 → 1.476 · 0.95 → **1.645** · 0.965 → 1.812 · 0.975 → **1.960** · 0.99 → **2.326** · 0.995 → **2.576** · 0.999 → 3.090 (= แถว ∞ ของตาราง t)
+
+## LLN · CLT · Confidence Interval
+
+### ค่าเฉลี่ยตัวอย่างเป็นตัวแปรสุ่ม
+
+ข้อมูล **i.i.d.** (อิสระ + มาจากการแจกแจงเดียวกัน) mean μ, SD σ · $S_n=\sum X_i$ · $\bar X_n=S_n/n$ ($\bar X$ สุ่ม แต่ μ คงที่)
+
+| | E | Var | SD |
+|---|---|---|---|
+| $X_i$ ตัวเดียว | $\mu$ | $\sigma^2$ | $\sigma$ |
+| ผลรวม $S_n$ | $n\mu$ | $n\sigma^2$ | $\sqrt n\,\sigma$ (โตขึ้น) |
+| ค่าเฉลี่ย $\bar X_n$ | $\mu$ | $\sigma^2/n$ | $\sigma/\sqrt n$ = **SE** (เล็กลง) |
+
+- **LLN:** $\bar X_n\xrightarrow{P}\mu$ คือ $\lim_{n\to\infty}P(\lvert\bar X_n-\mu\rvert\lt a)=1$ ทุก a > 0 (weak = in probability, strong = almost surely) · ทำงานด้วยการ**เจือจาง** ไม่ใช่ “ชดเชย” · ฮิสโตแกรม → pdf จริง
+- **CLT:** σ² จำกัด, n ใหญ่ (≥ 30; ข้อมูลเบ้มากต้องมากกว่า) → $\bar X_n\approx N(\mu,\frac{\sigma^2}{n})$, $S_n\approx N(n\mu,n\sigma^2)$ ไม่ว่าประชากรหน้าตาแบบไหน · ใช้กับ discrete ได้ (converge in distribution = cdf ลู่เข้า)
+- **กฎรากที่สอง:** error ลดตาม $\sqrt n$ → ลด error ครึ่งหนึ่งต้องเพิ่มข้อมูล 4 เท่า · ต้องการ $\sigma/\sqrt n\le0.01$ (σ = 1) → n ≥ 10,000
+- LLN บอกว่า $\bar X$ ไป**ที่ไหน** · CLT บอกว่าคลาดเคลื่อน**แค่ไหน รูปร่างอะไร**
+
+<Tip title="สูตรสำเร็จใช้ CLT 4 ขั้น">
+
+(1) ถามผลรวม $S_n$ (จำนวนทั้งหมด) หรือค่าเฉลี่ย $\bar X$ (สัดส่วน/ค่าเฉลี่ย) (2) หา μ, σ² ของข้อมูล 1 ตัว (Bernoulli: p, p(1−p)) (3) คูณ/หาร n (4) $Z=\frac{\text{ค่า}-\text{mean}}{\text{SD}}$ เปิดตาราง
+
+</Tip>
+
+- เหรียญ 100 ครั้ง หัว > 55: $S\approx N(50,5^2)$ → $P(Z>1)\approx$ **0.16** · Maxwell > 60 หน้า → $P(Z>2)=$ 0.023 · เต๋า 100 ลูก รวม > 380: μ = 3.5, σ² = 35/12 → $N(350,17.08^2)$ → $P(Z>1.76)=$ 0.039 · หลอดไฟ Exp mean 100, n = 36, $\bar X>110$: SE = 100/6 → $P(Z>0.6)=$ 0.274
+- **Continuity correction** (S เป็นจำนวนเต็ม): $P(X>40)=P(X\ge41)$ → ใช้ **40.5** · $P(X\ge40)$ → 39.5 · $P(X\lt 40)$ → 39.5 · HW10 (n = 100, p = 0.3, μ = 30, σ = 4.583): ไม่ correct 0.0146, correct 0.0110, ค่าจริง 0.0125 (หางคลาดได้มาก + Binomial เบ้ขวา)
+- **HW12 ข้อ 6:** $\frac1n\sum(X_i-\bar X)^2=\overline{X^2}-\bar X^2\to E[X^2]-\mu^2=\sigma^2$ (LLN สองครั้ง) และ $s^2=\frac{n}{n-1}\hat\sigma^2$ ก็ลู่เข้าเหมือนกัน
+
+### Confidence interval (CI)
+
+- **ทั่วไป:** $\bar X\pm z_{\alpha/2}\frac{\sigma}{\sqrt n}$ (90% → 1.645, 95% → 1.96 (สไลด์ปัด 2), 99% → 2.576) มาจาก “$\bar X$ ห่าง μ ไม่เกิน 2SE ⇔ μ ห่าง $\bar X$ ไม่เกิน 2SE”
+- **โพล worst case (สไลด์):** Bernoulli $\sigma^2=p(1-p)\le\frac14$ → 95% CI $=\bar X\pm\frac{1}{\sqrt n}$ · margin $e$ ต้องใช้ $n\ge 1/e^2$ (±5% → 400, ±3.3% → 900, ±2% → 2,500, ±1% → 10,000)
+- **แทน $\hat p$:** $\hat p\pm z\sqrt{\hat p(1-\hat p)/n}$ (แคบกว่า worst case เสมอ)
+- ตัวอย่าง: แฮมสเตอร์ 240/400 → $0.6\pm\frac1{20}=[0.55,0.65]$ · **2024 ข้อ 1.3** หัว 21/30: $\hat p=0.7$; worst case $0.7\pm\frac{1}{\sqrt{30}}=0.7\pm0.183\to[0.517,0.883]$; แทน $\hat p$: $0.7\pm1.96\sqrt{\frac{0.21}{30}}=0.7\pm0.164\to[0.536,0.864]$ (บอกว่าใช้แบบไหน)
+
+<Warn title="ความหมาย 95% CI (ออกบ่อย)">
+
+✅ “**วิธีสร้างช่วง**แบบนี้ ถ้าทำซ้ำ 100 ครั้ง ~95 ช่วงจะครอบ μ” · ❌ “มีโอกาส 95% ที่ μ อยู่ในช่วงนี้” (μ คงที่ **ช่วงต่างหากที่สุ่ม**) · ❌ “95% ของคนอยู่ในช่วงนี้” (CI เป็นของค่าเฉลี่ย) · Bayesian **credible interval** $P(a\le\theta\le b\mid D)=0.95$ พูดแบบแรกได้จริง
+
+</Warn>
+
+## Sampling & Estimation (MLE · MAP)
+
+### Inverse transform sampling
+
+คอมสุ่มได้แค่ $U(0,1)$ → 1) อินทิเกรต pdf ได้ $F$ 2) ตั้ง $p=F(x)$ แก้หา $x=F^{-1}(p)$ (เลือกรากให้อยู่ในช่วง) · ได้ผลเพราะช่วงที่ F ชัน (pdf สูง) รับ p กว้าง x จึงตกบ่อย
+
+- $f=2x$ บน [0,1] → $F=x^2$ → $x=\sqrt p$ · $f=3x^2$ → $x=p^{1/3}$ (p = 0.125 → 0.5)
+- Exp: $x=-\frac{\ln(1-p)}{\lambda}$ (λ = 1, p = 0.632 → x ≈ 1) · T(0,1): $u\le\frac12\Rightarrow x=\sqrt{u/2}$, $u>\frac12\Rightarrow x=1-\sqrt{(1-u)/2}$
+
+### Likelihood และ MLE
+
+**Likelihood** $L(\theta)=P(\text{Data}\mid\theta)=\prod_i f(x_i\mid\theta)$ มองเป็นฟังก์ชันของ θ (ข้อมูลตายตัว) **ไม่ใช่**ความน่าจะเป็นของ θ (รวมทุก θ ไม่ต้องได้ 1) · $\hat\theta_{\text{MLE}}=\arg\max_\theta L(\theta)$ = θ ที่ทำให้ข้อมูลที่เห็น “น่าเกิดที่สุด”
+
+<Tip title="สูตรสำเร็จ MLE 5 ขั้น">
+
+(1) เขียน pmf/pdf ของข้อมูล 1 ตัว (2) คูณทุกตัว (อิสระ) (3) take ln (คูณ → บวก, log เพิ่มเสมอ → ตำแหน่ง max เดิม, กัน underflow) (4) ดิฟเทียบ θ = 0 แก้หา θ (ค่าคงที่ไม่มี θ ทิ้งได้) (5) เช็ก $\ell''\lt 0$ และสมเหตุสมผล
+
+</Tip>
+
+| โมเดล | log-likelihood | MLE |
+|---|---|---|
+| Bernoulli/Binomial (k จาก n) | $k\ln\theta+(n-k)\ln(1-\theta)$ | $\hat p=k/n$ |
+| Geometric (#ล้มเหลว $k_i$) | $\sum k_i\ln(1-p)+n\ln p$ | $\frac{\#\text{สำเร็จ}}{\#\text{ครั้งที่ลองทั้งหมด}}$ |
+| Exponential | $n\ln\lambda-\lambda\sum x_i$ | $\hat\lambda=\frac{n}{\sum x_i}=\frac1{\bar x}$ |
+| Poisson | $\sum x_i\ln\lambda-n\lambda$ | $\hat\lambda=\bar x$ |
+| Normal | $-\sum\frac{(x_i-\mu)^2}{2\sigma^2}+\dots$ | $\hat\mu=\bar x$, $\hat\sigma^2=\frac1n\sum(x_i-\bar x)^2$ (biased) |
+
+- Maxwell อ่านเร็ว 55/100: $\frac{55}{\theta}-\frac{45}{1-\theta}=0$ → 0.55 · เครื่องจักร Exp อายุ 2,3,1,3,4: $5\ln\lambda-13\lambda$ → $\frac{5}{13}\approx0.385$ · Cappy สำเร็จครั้งที่ 1,1,3 → ล้มเหลว 0,0,2 → $L=p^3(1-p)^2$ → 3/5 · Poisson 2,0,3,1 → 1.5
+- **2024 ข้อ 5 (เหรียญ + เต๋าผสม)** หัว → เต๋า A (1/6 ทุกหน้า), ก้อย → B (คี่ 1/9 คู่ 2/9): total probability $P(\text{คี่หนึ่งหน้า})=\frac p6+\frac{1-p}9=\frac{2+p}{18}$, $P(\text{คู่})=\frac{4-p}{18}$ · คี่ออก 3+2+4 = 9, คู่ 4+5+4 = 13 → $\ell=9\ln(2+p)+13\ln(4-p)$ → $\frac9{2+p}=\frac{13}{4-p}$ → $\hat p=\frac{10}{22}=\mathbf{\frac5{11}}\approx0.455$
+- **HW11 ข้อ 1** $y_2\sim N(\alpha y_1,\sigma^2)$, $y_1\sim N(\alpha y_0,\sigma^2)$: Normal variance เท่ากัน = least squares $\min(y_2-\alpha y_1)^2+(y_1-\alpha y_0)^2$ → $\hat\alpha=\frac{y_1(y_0+y_2)}{y_0^2+y_1^2}$ (ไม่ขึ้นกับ σ², λ)
+- **ตัวประมาณที่ดี:** bias ต่ำ (unbiased $E[\hat\theta]=\theta$, ไม่เอียงอย่างเป็นระบบ) + variance ต่ำ (ไม่แกว่งเมื่อเปลี่ยนชุดข้อมูล) · MLE: **consistent**, asymptotically unbiased, asymptotically minimal variance · $s^2$ หาร **n − 1** = unbiased
+
+### MAP (Bayesian)
+
+$$
+\underbrace{P(\theta\mid D)}_{\text{posterior}}=\frac{\overbrace{P(D\mid\theta)}^{\text{likelihood}}\,\overbrace{P(\theta)}^{\text{prior}}}{P(D)},\qquad P(D)=\sum_\theta P(D\mid\theta)P(\theta)
+$$
+
+$$
+\hat\theta_{\text{MAP}}=\arg\max_\theta P(\theta\mid D)=\arg\max_\theta P(D\mid\theta)\,P(\theta)
+$$
+
+- P(D) ไม่มี θ → ตัดได้ตอนหา argmax แต่ถ้าถาม**ค่า** posterior ต้องหารด้วย P(D) · **prior uniform → MAP = MLE** · prior = 0 → ข้อมูลเท่าไรก็เปลี่ยนไม่ได้ (Pashmina บอก A → 0.8)
+- **Predictive:** $P(\text{ครั้งหน้า}\mid D)=\sum_\theta P(\text{ครั้งหน้า}\mid\theta)P(\theta\mid D)$
+
+| ลูกโอ๊ก Boss: เจอ 2/5 | p = 0.8 | p = 0.5 | p = 0.4 |
+|---|---|---|---|
+| prior | 0.4 | 0.4 | 0.2 |
+| likelihood $\binom52p^2(1-p)^3$ | 0.0512 | 0.3125 | 0.3456 (MLE) |
+| × prior | 0.0205 | **0.125 (MAP)** | 0.0691 |
+| posterior (÷ 0.2146) | 0.095 | 0.583 | 0.322 |
+
+ค้นอีกครั้งเจอ: $0.8(0.095)+0.5(0.583)+0.4(0.322)\approx0.496$ · เหรียญ prior ปกติ 0.9/ถ่วง(0.8) 0.1 หัว 4/4: likelihood 0.0625 vs 0.4096 → MLE 0.8; ×prior 0.05625 vs 0.04096 → MAP 0.5; posterior ปกติ 0.579
+
+- **เลือกใช้:** มี prior ที่อธิบายได้ → MAP (ข้อมูลน้อย/noise เยอะ) · ไม่มี → MLE (เป็นกลาง ข้อมูลเยอะกลบ prior อยู่ดี)
+- Frequentist: θ ค่าจริงตายตัว, ถาม $P(D\mid\theta)$, ได้ MLE + confidence interval · Bayesian: θ เป็นตัวแปรสุ่ม, ถาม $P(\theta\mid D)$, ใช้ prior, ได้ posterior + MAP + credible interval (xkcd ดวงอาทิตย์ระเบิด)
+
+## Hypothesis testing: หลักการ
+
+- **$H_0$** = default ไม่มีผล/ไม่ต่าง (บริสุทธิ์จนกว่าจะพิสูจน์ผิด) · **$H_A$** = สิ่งที่อยากพิสูจน์ ยอมรับเมื่อปฏิเสธ $H_0$ ได้
+- **Test statistic** (ตัวเลขจากข้อมูล, สุ่ม) · **Null distribution** (การแจกแจงของมันถ้า $H_0$ จริง) · **Rejection region** (ตกตรงนี้ → reject) · **Significance α** = $P(\text{ตกใน rejection}\mid H_0)$ (0.1/0.05/0.01) · **Critical value** = เส้นแบ่ง = quantile เช่น $z_{0.05}=1.645$
+- **p-value** = **สมมติ $H_0$ จริง** โอกาสเห็นข้อมูล “สุดโต่งอย่างน้อยเท่า” ที่เห็น · **reject ⇔ p ≤ α ⇔ statistic อยู่ใน rejection region** (ให้ผลเดียวกันเสมอ)
+- **One-sided:** ดีกว่า/สูงกว่า/beat/outperform/ปรับปรุง → α ทั้งหมดหางเดียว ($z_\alpha$) · **Two-sided:** ต่างไหม/biased/ลำเอียง → α/2 ต่อหาง ($\pm z_{\alpha/2}$), p = 2 × หางเดียว · **เลือกก่อนดูข้อมูล** (HW11 ข้อ 3: t = 2, df 15 → two-sided crit 2.131 ไม่ reject, one-sided 1.753 reject)
+
+| | $H_0$ จริง | $H_A$ จริง |
+|---|---|---|
+| reject $H_0$ | **Type I** (false positive) = α | ✅ **power** = 1 − β |
+| ไม่ reject | ✅ 1 − α | **Type II** (false negative) = β |
+
+- **Power** $=P(\text{reject}\mid H_A)$ ตั้งเป้า 0.8 · ลด α → power ลด · **เพิ่ม power โดยไม่เพิ่ม α:** เพิ่ม n, ลด noise σ, effect ใหญ่ขึ้น (หรือใช้ paired / one-sided)
+- **Effect size (Cohen's d)** $=\frac{\lvert\mu_1-\mu_2\rvert}{\sigma}$ · $t=\frac{\text{signal}}{\text{noise}}=\frac{\bar x-\mu_0}{s/\sqrt n}\approx d\sqrt n$
+- **เลือก α ตามราคาของการผิด:** Type I แพงกว่า → α เล็ก (ลายนิ้วมือ: คนบริสุทธิ์ติดคุก → 0.01) · Type II แพงกว่า → α ใหญ่ได้เพื่อเพิ่ม power (ช็อกโกแลต cocoa ≥ 72%: ทิ้งล็อตดีแค่เสียของ, ปล่อยล็อตเสียเสียชื่อ → 0.1) เขียนให้ครบ: Type I คือ…ราคา… / Type II คือ…ราคา… / สรุป α
+- Power ตัวอย่างเหรียญ $H_0$: θ = 0.5, n = 10 reject 0–2, 8–10 (α ≈ 0.11): θ จริง 0.1 → power 0.9, θ 0.4 → 0.2, n = 1000 → ≈ 1
+
+<Tip title="6 ขั้น NHST = โครงตอบข้อเขียน">
+
+(0) สิ่งที่อยากทดสอบ ($H_A$) (1) ตั้ง $H_0$ (2) one/two-sided (+เหตุผลจากคำในโจทย์) (3) เลือก test → null distribution, df (4) α → critical value/rejection region (5) power/ขนาดตัวอย่าง → แล้วคำนวณ statistic/p และ**สรุปเป็นภาษาคน**: “ปฏิเสธ $H_0$: …สูงกว่าอย่างมีนัยสำคัญที่ α = …” หรือ “**ปฏิเสธ $H_0$ ไม่ได้ / ยังไม่มีหลักฐานพอ**” (ห้ามเขียน “ยอมรับ $H_0$” หรือ “พิสูจน์ว่าไม่ต่าง”)
+
+</Tip>
+
+<Warn title="อ่านตาราง t ให้ถูก (ห้องสอบแจกแค่ตาราง t)">
+
+ตาราง = **หางเดียว** $P(T>t_\alpha)=\alpha$ · two-sided ใช้คอลัมน์ α/2 · **แถว ∞ = ค่า z** · df ไม่มีในตาราง → ใช้แถว df **น้อยกว่า**ที่ใกล้สุด (ระวังกว่า), df > 120 → ∞ · **ตารางปี 2024 หัวคอลัมน์เลื่อนตั้งแต่คอลัมน์ 3** เช็กกับแถว ∞ ทุกครั้ง:
+
+| หัวที่พิมพ์ | 0.1 | 0.05 | 0.01 | 0.005 | 0.001 | 0.0005 | 0.0001 |
+|---|---|---|---|---|---|---|---|
+| แถว ∞ | 1.282 | 1.645 | 1.960 | 2.327 | 2.576 | 3.091 | 3.291 |
+| **α จริง** | 0.1 | 0.05 | **0.025** | **0.01** | **0.005** | **0.001** | **0.0005** |
+
+</Warn>
+
+## สูตร test ทั้งหมด + เลือก test
+
+| Test (ใช้เมื่อ) | Statistic | Null dist. |
+|---|---|---|
+| **Z-test** mean vs $\mu_0$, **รู้ σ** | $z=\frac{\bar x-\mu_0}{\sigma/\sqrt n}$ | $N(0,1)$ |
+| **One-sample t** ไม่รู้ σ | $t=\frac{\bar x-\mu_0}{s/\sqrt n}$, $s^2=\frac{\sum(x_i-\bar x)^2}{n-1}$ | $t(n-1)$ |
+| **Two-sample t** 2 กลุ่ม**อิสระ** σ เท่ากัน | $t=\frac{\bar x-\bar y}{s_p\sqrt{1/n+1/m}}$ | $t(n+m-2)$ |
+| **Paired t** ข้อมูลเป็นคู่ | $w_i=x_i-y_i$, $t=\frac{\bar w}{s_w/\sqrt n}$ | $t(n-1)$ |
+| **สัดส่วน vs $p_0$** (โพล) | $z=\frac{\hat p-p_0}{\sqrt{p_0(1-p_0)/n}}$ | $N(0,1)$ |
+| **Two-proportion z** 2 กลุ่ม 0/1 | $z=\frac{\hat p_1-\hat p_2}{\sqrt{\hat p(1-\hat p)(1/n_1+1/n_2)}}$ | $N(0,1)$ |
+| **χ² goodness of fit** นับในหมวด | $\sum\frac{(O-E)^2}{E}$ | $\chi^2(k-1)$ |
+| **McNemar** 0/1 เป็นคู่ (ก่อน-หลัง) | $\frac{(B-C)^2}{B+C}$ | $\chi^2(1)$ |
+| **Wilcoxon signed-rank** คู่ แต่ไม่ normal | $W_-$ = ผลรวมอันดับของ $\lvert d\rvert$ ที่ติดลบ | นับ pattern |
+| **Fisher transformation** correlation r | $z=\operatorname{atanh}(r)\sqrt{n-3}$ | $N(0,1)$ |
+
+- **Pooled variance** $s_p^2=\frac{(n-1)s_x^2+(m-1)s_y^2}{n+m-2}$ · **pooled p** $\hat p=\frac{x_1+x_2}{n_1+n_2}$ · $\operatorname{atanh}r=\frac12\ln\frac{1+r}{1-r}$
+- **Two-proportion ใช้ได้เมื่อ**แต่ละกลุ่มคาดว่ามีทั้ง “ใช่” และ “ไม่ใช่” **≥ 5** ไม่งั้นใช้ exact test (Fisher's exact)
+- **Wilcoxon** n ใหญ่: $z=\frac{W_- - n(n+1)/4}{\sqrt{n(n+1)(2n+1)/24}}$ · ไม่ต้องสมมติ normal (ใช้ rank)
+- **อื่นๆ:** ANOVA (mean > 2 กลุ่ม, อย่าทำ t ทีละคู่) · Welch's t (variance ไม่เท่า) · Shapiro-Wilk (normality) · Levene (variance เท่ากัน) · χ² homogeneity, likelihood-ratio
+
+| χ² crit. | df 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|
+| α = 0.10 | 2.706 | 4.605 | 6.251 | 7.779 | 9.236 |
+| α = 0.05 | 3.841 | 5.991 | 7.815 | 9.488 | 11.070 |
+| α = 0.01 | 6.635 | 9.210 | 11.345 | 13.277 | 15.086 |
+
+<Tip title="เลือก test: 3 คำถาม">
+
+(1) **ถามอะไร** mean / สัดส่วน / นับหมวด / correlation (2) **ข้อมูลแบบไหน** ต่อเนื่องหรือหมวด, กี่กลุ่ม, **อิสระหรือคู่** (ค่าในกลุ่ม 1 จับคู่กับค่าในกลุ่ม 2 อย่างมีความหมายได้ไหม: คนเดิม/เครื่องเดิม/query เดิม → paired, มักมี power มากกว่า) (3) **assumption** normal? (plot, Shapiro-Wilk) variance เท่า? (Levene) อิสระ? · WRONG → RIGHT: categorical ใช้ t ❌ → χ² · ชุดเดิมวัดซ้ำใช้ two-proportion ❌ → McNemar · คู่ไม่ normal ใช้ paired t ❌ → Wilcoxon · ถือว่า r normal ❌ → Fisher
+
+</Tip>
+
+### ตัวอย่างพร้อมคำตอบ (เช็กเลข)
+
+- **Z ข้าว** $N(7000,150^2)$, 15 แปลง $\bar x=7077$, beat → one-sided: $z=\frac{77}{150/\sqrt{15}}=1.988>1.645$ → reject
+- **t ส่วนสูง** 153 vs 280 คน $\bar x=156$, s = 10.02: $t=5.011$ df 279 ≫ 1.65 → reject
+- **t เว็บ (HW11 ข้อ 2)** $\bar x-\mu_0=138.19$, s = 120, n = 10: $t=3.64\lt t_{0.001,9}=4.297$ → ไม่ reject · หา n ใหม่ต้องเทียบ t ที่ df = n − 1 ทีละค่า (**ห้ามใช้ z**) → n = 13
+- **2-sample GCC vs Clang** (two-sided): $\bar x=12.96$, $\bar y=12.10$, $s_p^2=0.1065$, $t=\frac{0.86}{0.2064}=4.17>t_{0.025,8}=2.306$ → ต่าง
+- **2-sample ร้าน A/B** α 0.1 one-sided: $s_p^2=49.38$, $t=0.685\lt1.356$ ไม่ reject · ข้อมูลซ้ำ 4 รอบ (n = 28) $t=1.452>1.30$ reject (n ↑ SE ↓)
+- **2024 ข้อ 4 heat sink** A 78.5 vs B 76.5, $s_p^2=4.722$, df 18: $t=\frac{2}{0.972}=2.058$ · one-sided ($t_{0.05,18}=1.734$) reject · two-sided ($t_{0.025,18}=2.101$) **inconclusive** → เก็บข้อมูลเพิ่ม, ลด noise, เช็ก assumption, อย่าสรุปว่าไม่ต่าง
+- **ร้านกาแฟ (W5–W7)** 1.8 vs 1.6, $s_1^2=0.7$, $s_2^2=0.8$, $s_p^2=0.75$: $t=0.365\lt2.306$ → ไม่ต่าง · ต้องรายงาน SD/n/CI ไม่ใช่แค่ mean · ช่วงเวลาที่ไปเป็น confounder, n = 5 power ต่ำ, ปัดเป็นนาที
+- **Paired** ผลต่าง 40,40,−5,90,40,20: $\bar w=37.5$, $s_w=31.26$, $t=2.94>t_{0.05,5}=2.015$ (p = 0.016) · Wilcoxon: $W_-=1$, $P=\frac{2}{64}=0.031$
+- **Two-proportion ยา A** 31/40 vs 30/40: $\hat p=0.7625$, SE = 0.0952, z = 0.263 (p = 0.396) · **ยา B** 5/5 vs 30/40: z = 1.268 (p = 0.102) แต่กลุ่มยาคาดว่าตายแค่ 1.1 คน \< 5 → ใช้ z ไม่ได้ → ไม่ควรเชื่อทั้งคู่
+- **2024 ข้อ 2 โพล** $H_0$: p = 0.5106, two-sided α 0.1 → ±1.645: z = 0.56, −0.92, 1.54 → **ไม่มีโพลไหน biased**
+- **2024 ข้อ 1.5 IQ** z-test (รู้ σ = 15), $\bar x=1000/10=100$ → z = 0 → **p = 0.5** (one-sided; two-sided = 1)
+- **2024 ข้อ 3 ช็อกโกแลต 10 รส** one-sample t one-sided ($H_A$: μ > 8.5) df 4: มีแค่รส 10 ($\bar x=9.4$, s = 0.548) $t=3.67$ (p ≈ 0.011) > 2.132 แต่ทดสอบ 10 รส → Bonferroni α = 0.005, crit 4.604 → **ไม่ผ่าน** · เลือก 1 รส → รส 10 (หลักฐานยังไม่แข็ง ควรเก็บเพิ่ม) · เลือก 3 รส → ไม่มีรสอื่นเกิน 8.5 เลย ไม่มีหลักฐานรองรับ
+- **ลูกเต๋าคาสิโน (HW11 ข้อ 5)** $H_A$: p \< 1/6 (one-sided ซ้าย, โกงทางเดียว) · ออก 3/30: p-value $=P(X\le3)=0.240$ ไม่ reject · n = 200, α 0.1: Binomial $P(X\le26)=0.0945$ → reject $X\le26$ (Normal: $33.33-1.2816(5.27)=26.58$ ได้เท่ากัน) · **power ต่ำกว่า α ไม่ได้**
+- **โรงงาน (HW11 ข้อ 7)** รวม 120 วัน z = 4.24 reject · แยกโรงละ 30 วัน SE ใหญ่ 2 เท่า → โรง 3 ไม่ผ่าน (ไม่ได้แปลว่าไม่ดีขึ้น) · t ให้ข้อสรุปเดียวกัน · 4 tests → ควรพูดถึง Bonferroni
+- **McNemar index** B = 9 (fail→pass), C = 2: $\frac{49}{11}=4.45>3.841$ · exact $P(X\le2\mid11,0.5)=\frac{67}{2048}=0.033$ · **χ² GoF** หน้าเว็บ 3 แบบ 300 คน: E = 100/แบบ, df 2 · **Fisher** r = 0.5, n = 28: z = 0.549 × 5 = 2.75 (p = 0.003)
+- **แอร์ใหม่นิ่งกว่า (HW11 ข้อ 6)** ทดสอบ **SD** ไม่ใช่ mean: $H_0$: σ = 0.5 vs $H_A$: σ \< 0.5 (+เช็ก μ = 15) · assumption: log จากห้องเหมือนกัน, อิสระ, normal, ไม่ cherry-pick
+
+## กับดัก p-value + Multiple testing
+
+<Warn title="p ใหญ่ = สรุปไม่ได้ (absence of evidence ≠ evidence of absence)">
+
+4 สาเหตุ: $H_0$ จริง · n น้อย (power ต่ำ) · noise สูง · ผลจริงเล็กมาก · ตาราง Springer: p เท่ากัน (0.6) แต่ A (CI −30 ถึง 50) = หลักฐานว่าผลเล็ก/ไม่มี vs B (CI −177 ถึง 277) = ตอบอะไรไม่ได้ · p = 0.001 เท่ากัน แต่ C ผลจริงแต่**เล็ก** (0.8–3.2) vs D ผล**ใหญ่** (24–46) → **รายงาน effect size + CI เสมอ**
+
+</Warn>
+
+- **5 misuse:** p ≠ $P(H_0\text{ จริง})$ หรือ $P(H_A\text{ ผิด})$ · ≠ โอกาสที่ผลเกิดจากบังเอิญล้วนๆ · 0.05 แค่ธรรมเนียม · ไม่บอกขนาด/ความสำคัญ · ≠ อัตรา false positive จริง (ขึ้นกับ base rate)
+- **Fallacy:** “งานตีพิมพ์ผิดแค่ 5%” ❌ (α เป็นของวิธี + ตีพิมพ์แต่ผล sig + base rate) · “p = โอกาสที่ผมผิด” ❌: p = $P(\text{data}\mid H_0)$ ≠ $P(H_0\mid\text{data})$ (กลับเงื่อนไข ต้องรู้ prior)
+- **Edge cases:** $\bar x=\mu_0$ → two-sided p = 1, one-sided 0.5 · ผลสวนทาง → p > 0.5 · p = 0 แค่เล็กมาก · s = 0 ไม่ต้องทดสอบ · **Big data** อะไรก็ significant → statistical ≠ **practical significance**
+- **p-hacking:** เพิ่มคนจนกว่าจะ sig, วิเคราะห์บางส่วน, เพิ่มตัวแปร, transform, ตัด outlier, เปลี่ยน control/outcome/test = ทดสอบหลายครั้งแอบๆ (xkcd เจลลี่บีน 20 สี → เขียว sig) → ตัดสินใจทุกอย่าง**ก่อน**เก็บข้อมูล
+- **Low power อันตราย:** ไม่ sig ก็ไม่บอกอะไร + สัดส่วนของจริงในผล sig ต่ำลง (สูตร base rate) → คำนวณ n ก่อนเสมอ
+
+### Multiple testing
+
+- $m$ tests ที่ $H_0$ จริงหมด: คาดว่า false positive **$m\alpha$** ครั้ง (4,000 × 0.05 = 200; ทดสอบทุกวัน 60 วัน → 3 วัน) · $P(\ge1\text{ FP})=1-(1-\alpha)^m$ (m = 20 → 0.64, m = 4 → 0.185)
+- **FWER (คุมโอกาสผิดแม้แต่ 1)**: **Bonferroni** $\alpha/m$ (ง่าย แต่ conservative, power หาย) · **Šidák** $1-(1-\alpha)^{1/m}$ (m = 10: 0.005 vs 0.005116)
+- **FDR** $E[\frac{\text{false discoveries}}{\text{discoveries}}]\le q$ ด้วย **Benjamini-Hochberg**: เรียง p น้อย→มาก, เทียบ $p_i\le q\cdot\frac im$, หา **i ที่ใหญ่ที่สุดที่ผ่าน** → ทุกตัวที่ p ≤ ตัวนั้น significant (**ไม่หยุดที่ตัวแรกที่ไม่ผ่าน**)
+
+| p | 0.003 | 0.023 | 0.027 | 0.045 | 0.053 |
+|---|---|---|---|---|---|
+| $0.05\cdot i/5$ | 0.01 | 0.02 | 0.03 | 0.04 | 0.05 |
+| B-H (Bonf. 0.01) | ✓ (✓) | ✓ (✗) | ✓ (✗) | ✗ | ✗ |
+
+ซอง 4 สี p = 0.004, 0.020, 0.030, 0.300: Bonferroni (0.0125) / Šidák (0.0127) ผ่าน 1 สี · B-H (0.0125, 0.025, 0.0375, 0.05) ผ่าน 3 สี
+
+## Causation · Confounder · RCT
+
+- **Confounder** ส่งผลทั้งตัวแปรต้นและตัวแปรตาม (Drug ← Gender → Heart attack; Education ← Social status → Income) · ข้อมูลเชิงสังเกต (observational) บอกเหตุไม่ได้ (Diet Coke ทำให้อ้วน หรือคนอ้วนเลือกดื่ม?)
+- **Simpson's paradox:** ยาแย่กว่าในหญิง (7.5% vs 5%) และชาย (40% vs 30%) แต่รวมแล้วดีกว่า (18% vs 22%) เพราะหญิง (เสี่ยงต่ำ) ไปกระจุกในกลุ่มได้ยา · เกมกับคะแนน: รวมขาลง แยกกลุ่มขาขึ้น · โจทย์บัญชีม้า Q42 → **ไม่มีข้อไหนต้องจริง**
+- **RCT** = สุ่มตัวแปรต้น (do(X)) ตัดลูกศรจาก confounder → เหลือแค่ความบังเอิญ → ใช้ testing · = A/B test
+- **คุมตัวแปรไหน (HW12 ข้อ 5):** คุม **สาเหตุร่วม** (อายุ → สูบบุหรี่ & มะเร็ง) · **ไม่คุม collider** (ผลของทั้งคู่: ยอดขายปืน) · **ไม่คุม mediator** (ทางผ่าน: เผาไร่ → PM2.5 → โรคปอด)
+- **สองปัจจัยเกิดพร้อมกัน (HW11 ข้อ 4):** เว็บคู่แข่งโดนบล็อก + เพิ่มช่องใหม่วันเดียวกัน → $x_1$ vs $x_0$ confounded (แยกไม่ได้) · $x_1$ vs $x_2$ ต่างแค่ช่องใหม่ แต่เทียบข้ามเวลา · ดีสุด: A/B ช่วงเวลาเดียวกัน สุ่มผู้ใช้เห็น/ไม่เห็นช่องใหม่
+- Good practice: คำนวณ n ก่อน · ไม่ต้องตัดสินใจ = ไม่ต้อง test (plot แทน) · “significant” = statistically · แสดงการแจกแจง (scatter/box) vs ค่าเฉลี่ย (± SD, ± CI, ± SEM) บอกคนละเรื่อง
+
+## A/B testing (ข้อเขียน 10 คะแนน)
+
+**A/B test** = สุ่มแบ่งผู้ใช้ 2 กลุ่ม คุมทุกอย่างให้เหมือนกัน ความต่างจึงมาจาก **treatment + ความสุ่ม** แล้วใช้ testing แยกสองอย่างนี้ (แทน gut feeling, HiPPO, FOMO) · Bing สีลิงก์ +10M USD · Google ช้า 100–400 ms ค้นหาลด 0.2–0.59%
+
+### 1) Metric
+
+- **Relevant** (หลังจุดที่เปลี่ยน, ผูกกับเป้าหมาย): conversion, add-to-cart, checkout, **payment** rate · **Vanity**: clicks, CTR, page views, visitors, likes
+- **Granularity (ตัวหาร):** hits/impressions (รีเฟรชนับซ้ำ) · sessions (หมดอายุ 15–30 นาที) · cookies (หลายเบราว์เซอร์นับซ้ำ) · user IDs (คนไม่ล็อกอินรวมเป็นหนึ่ง) · device · people (วัดยาก) · **HW12 ข้อ 2:** สนใจ “ทุกครั้งที่เห็นหน้า” (หาปุ่มเจอ) → ÷ page views · สนใจ “คน” (ซื้อ, คูปอง, sign up) → ÷ unique visitors
+- **Attribution period:** journey ยาวแค่ไหน (plot ดู; e-commerce ~1 วัน, ตั๋วเครื่องบิน/สมัครงานเป็นสัปดาห์) · เข้าวัน 1, 4 ซื้อวัน 6: 1-day 1/3, 3-day 1/2, 1-week 1/1
+- **Event-based** = conversion ที่เกิดในเดือนนั้น ÷ ผู้ใช้เดือนนั้น · **Cohort-based** = conversion ภายใน X วันของคนที่มาเดือนนั้น ÷ ผู้ใช้เดือนนั้น (HW12 ข้อ 3: A ซื้อทันที, C มา 30 พ.ย. ซื้อ 5 ธ.ค. → event 1/3, cohort 2/3)
+- **Assumed distribution** (frequentist ต้องรู้ variance): event → Bernoulli $p(1-p)$ · รายได้/ตำแหน่งคลิก → Exponential · ส่วนสูง/error → Normal/t · ต้อง i.i.d. → **plot ดู** · **Robust** (ของเหมือน ค่าไม่เปลี่ยน, เช่น median) vs **Sensitive** (ของต่าง ค่าเปลี่ยนตาม, เช่น p99)
+
+### 2) Split
+
+- หน่วยสุ่ม: **hits** (usability, รีเฟรชเห็นอีกแบบ) · **sessions** · **cookies** (คนเดิมเห็นแบบเดิม เช่น recommendation) · **user IDs** (เข้มสุด แต่คนไม่ล็อกอินใช้ไม่ได้) · hits/sessions มักไม่อิสระ · สุ่มหน่วยใหญ่กว่าหน่วยวัด → ต้องใช้ n มากขึ้น · **กลุ่มห้ามมีปฏิสัมพันธ์** (social network ผลรั่วข้ามกลุ่ม)
+- **50/50** เร็วกว่าแต่เสี่ยงกว่า · **80/20** นานกว่าแต่เสี่ยงน้อย · **Control for X:** ทำ test แยกตาม confounder (traffic source: มาจากค้นหาซื้อง่ายกว่า) · **Frame fairly** (ย้ายช่องคอมเมนต์แล้วคนหาไม่เจอ) · หลายการทดลองพร้อมกัน → **สุ่มแต่ละอันอิสระ** (ซองแดงบังเอิญได้ราคาต่ำ)
+
+### 3) Test
+
+“สมมติ $H_0$ (ไม่ต่าง) จริง โอกาส (p) ที่จะเห็นผลสุดโต่งกว่านี้ น้อยกว่า false positive ที่ยอมรับได้ (α)” · conversion → **two-proportion z** (one-tailed ถ้าถาม “ดีกว่า”) · ค่าต่อเนื่อง → t / Welch
+
+### 4) Stopping criteria + ขนาดตัวอย่าง
+
+ไม่ตั้งจุดหยุดก่อน → รันนานพอ z ไหลข้ามเส้นได้เอง · **MDE** = ความต่างเล็กสุดที่คุ้มจะตรวจ (ตัดสินใจทางธุรกิจ) ผูกกับ d, power, α
+
+$$
+n=\frac{m+1}{m}\left(\frac{(z_\alpha+z_\beta)\,\sigma}{\text{MDE}}\right)^2 \text{ (ควบคุม)},\quad mn \text{ (ทดลอง)}
+$$
+
+$$
+\text{50/50 } (m=1):\quad n=2\left(\frac{(z_\alpha+z_\beta)\,\sigma}{\text{MDE}}\right)^2 \text{ ต่อกลุ่ม}
+$$
+
+- มาจาก critical value ห่าง 0 เป็น $z_\alpha$ SE และห่าง MDE เป็น $z_\beta$ SE: $z_\alpha+z_\beta=\frac{\text{MDE}}{\sigma\sqrt{1/n+1/(mn)}}$
+- $z_\alpha=\Phi^{-1}(1-\alpha)$ (**หางเดียว**; two-sided ใช้ $z_{\alpha/2}$) · $z_\beta=\Phi^{-1}(1-\beta)$: power 0.8 → 0.842, power 0.5 → 0 · **m = ทดลอง ÷ ควบคุม**: 50/50 → 1, 33/67 → 2, 80/20 → **0.25** · σ² = p(1 − p) ของ**คนเดียว** ใช้ p เดิม · MDE absolute: 10% → 11% คือ 0.01 · **ปัดขึ้นเสมอ**
+
+| กรณี | ค่า | n ต่อกลุ่ม |
+|---|---|---|
+| p 0.10, MDE 0.01, α 0.05 (1 หาง), 0.8, 50/50 | $2\cdot\frac{6.183\cdot0.09}{0.0001}$ | 11,129 (สไลด์ 11,128) |
+| p 0.10, MDE 0.02, เหมือนเดิม | 50/50 / 80/20 | 2,783 / 6,956 + 1,739 |
+| **HW12 ข้อ 9** p 0.11, MDE 0.01, α 0.15, 0.8, 80/20 | $5\cdot\frac{(1.036+0.842)^2\cdot0.0979}{0.0001}$ | **17,266 + 4,317** |
+| p 0.20 → 0.22, two-sided 0.05, 0.8 / 0.5 | $(1.96+0.842)^2$ / $1.96^2$ | 6,280 / 3,074 |
+
+- **A/A test:** แบ่ง control vs control ดูว่าความต่างจากความสุ่มล้วนๆ ใหญ่แค่ไหน (~±0.002) → ประมาณ variance + ตั้ง MDE ไม่ให้เล็กกว่า noise
+- **Seasonality:** รันจนได้ n ครบ **และ** ครอบคลุม seasonality (≥ 1 สัปดาห์เต็ม) เอาอันที่นานกว่า · normalize year-on-year
+
+### 5) Run & monitor
+
+- **ห้าม peek!** ดูซ้ำแล้วหยุดเมื่อ sig = multiple testing แอบๆ: false positive **22.4%** vs ดูครั้งเดียว 6.4% (เจอผลจริงเท่าเดิม 99.6%)
+- **Sanity check:** แบ่งกลุ่มตามที่ตั้งใจไหม (cookie เดียวเห็น 2 แบบ = หายนะ), ตัวแปรคุมถูกคุมจริง · **Twyman's law** ผลที่น่าสนใจเกินไปมักผิด (ใช้ random() ทุกครั้งที่โหลดหน้า, variation โหลดไม่ขึ้น, tracking พัง: GTM/Firebase)
+- **Novelty effect** → หลังประกาศผู้ชนะเหลือ holdout control ~10% ไว้ตรวจต่อ
+
+### 6) Analyze & decide
+
+แก้ multiple testing (Bonferroni/Šidák/B-H) · significant แต่ต่างนิดเดียวอาจไม่คุ้ม · ไม่ significant ≠ เหมือนกัน · ตัดสินใจทางธุรกิจ (ความเสี่ยง, ต้นทุน) · **control ชนะบ่อยมาก** · tracking, tracking, tracking · เขียน assumption ให้ชัด
+
+<Warn title="5 กรณีที่ไม่ควรใช้ A/B test (HW12 ข้อ 1)">
+
+(1) สรุปเป็น metric ไม่กี่ตัวไม่ได้ (“ผู้ใช้มีความสุขไหม”) (2) ของใหม่ทั้งหมด ไม่ใช่ apple-to-apple (premium, rebrand → survey/focus group) (3) ผลเกิดช้า (ซื้อรถซ้ำ 5 ปี) (4) เหตุการณ์ครั้งเดียว (11.11, Black Friday) (5) แบ่งกลุ่มอิสระไม่ได้ (ผังร้านจริง, iOS vs Android = เชิงสังเกต) · **ทำได้:** สีปุ่ม, โมเดล rec 4 ตัว (+แก้ multiple), backend โหลดเร็ว, 15 vs 20 ชิ้นต่อหน้า
+
+</Warn>
+
+<Tip title="Design journal ซองเมล็ดทานตะวัน = แม่แบบคำตอบ">
+
+(1) **Metric** # payment / # cookie-days, แต่ละ cookie = Bernoulli (2) **Split** 50/50 ตาม cookie, test แยก cookie ที่เข้าเว็บตรง (คุม traffic source) (3) **Test** one-tailed Z, α 5% (4) **Stop** MDE 1% (จาก A/A), n จากสูตร (~5,000/variation) และ ≥ 1 สัปดาห์ (5) **Monitor** cookie เห็นแค่ variation ของตัวเอง, holdout 10% (6) **Analyze** ทดสอบครั้งเดียวตอนจบ ใช้สีที่ชนะ · **เขียน assumption ทุกข้อ** (คะแนนอยู่ตรงนี้)
+
+</Tip>
+
+### ข้อสอบ 2024 ข้อ 6 Boss Hamtaro (downline 1% กำไร 10,000; อีก 99% กำไร 10 → วิดีโอเหลือ 5)
+
+- **6.1** เปิด B อย่างเดียวแล้วเทียบช่วงก่อน = ไม่มี control ช่วงเวลาเดียวกัน → seasonality, เทรนด์, ข่าว, แหล่งผู้ชมเปลี่ยน = confounder
+- **6.2** เป้าหมายจริง = **กำไรต่อผู้ชม**: A = 0.01(10,000) + 0.99(10) = **109.9** · B = 10,000q + 5(1 − q) ≥ 109.9 → **q ≥ 1.0495%** → วัด downline conversion = # downline / # ผู้ชม (attribution ครอบคลุมเวลาตัดสินใจ)
+- **6.3** สุ่มตาม account/cookie, 80/20 ถ้ากลัวเสียกำไร, คุมช่องทางที่มา/เวลา, ระวัง downline ชวนกันข้ามกลุ่ม · **6.4** Bernoulli → two-proportion z one-sided (กำไรต่อคนเบ้มาก ไม่ normal)
+- **6.5** MDE = 0.0005 (จุดคุ้มทุน), σ² = 0.01 × 0.99, α 0.05, power 0.8: $n=2\cdot\frac{6.183\cdot0.0099}{0.0005^2}\approx$ **489,700/กลุ่ม** (base rate ต่ำ + MDE เล็ก) ถ้าไม่ไหวเพิ่ม MDE/ลด power, ≥ 1 สัปดาห์, ห้าม peek
+
+### โจทย์ฝึก + การบ้าน A/B
+
+- **ลิงก์ในคอมเมนต์ (W1–W4):** metric = คลิก “Read more” ÷ reach (likes/reactions = vanity, comments พองเองเพราะลิงก์อยู่ในคอมเมนต์) · สุ่ม**ระดับโพสต์** (สุ่มผู้ใช้ไม่ได้) คุมประเภทโพสต์ (กีฬา/รีวิว), คุณภาพนักเขียน (ChadGPT), เวลาโพสต์ (เที่ยง), เก็บผลหลัง 1 วัน (วิว 99%) · stop: MDE 10% ของค่าเดิม, σ จากโพสต์เก่า → n โพสต์/กลุ่ม + ≥ 1 สัปดาห์ · อัลกอริทึมเปลี่ยนทุกวัน → โพสต์ A และ B วันเดียวกัน แล้วใช้ **paired test** รายวัน
+- **ครูจับโค้ด AI (W7–W10):** ดีกว่าเดา ($H_0$ p = 0.5): z = 5.09 ✓ · ≥ 90%? z = −0.94 ปฏิเสธไม่ได้ · แต่ 50 ครั้ง**ไม่อิสระ** (ครู 10 คน × 5 ข้อ, E8 ได้ 1/5) · ความคุ้นเคย: z = 3.47 แต่กลุ่มสูงผิดแค่ 1 ครั้ง (\< 5) → Fisher's exact (p ≈ 0.002) · ความคุ้นเคยกับวิชาที่สอน **confounded** แยกไม่ได้ · แนะนำ: เปลี่ยนวิธีวัดผล (สอบในห้อง, อธิบายโค้ดปากเปล่า) เพราะกล่าวหาผิดแพง
+- **HW12 ข้อ 10** Red 5,901/59,504 vs Gold 6,012/58,944, α 7% one-sided: $\hat p=0.10058$, SE = 0.001748, **z = 1.616 > 1.476** → เลือก Gold (two-sided 1.812 จะไม่ผ่าน) · 93% CI: Red [0.0969, 0.1014], Gold [0.0997, 0.1043] **CI ซ้อนกัน ≠ ไม่ significant** (test ดู SE ของผลต่างซึ่งเล็กกว่า)
+- **HW12 ข้อ 7–8, 11** p-value = ข้อ 7.1 เท่านั้น (7.4 = power) · 4,000 tests → 200 FP · จริง: ไม่บอกขนาดผล, พิสูจน์ $H_0$ ไม่ได้, n ใหญ่เกินทำให้ความต่างจิ๋ว sig · เท็จ: ไม่รู้ว่าจะหยุดเมื่อไร, รันกี่ test ก็ได้ด้วย α เดิม, sig เป็นปัจจัยเดียว, ทดสอบได้แค่สัดส่วน, n ยิ่งมากยิ่งดีเสมอ

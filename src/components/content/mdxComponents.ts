@@ -15,6 +15,7 @@ import { RejectionPowerExplorer } from '../interactive/RejectionPowerExplorer'
 import { SampleSizeCalculator } from '../interactive/SampleSizeCalculator'
 import { Callout, Def, Example, Tip, Warn } from './Callout'
 import { Compare, CompareItem } from './Compare'
+import { PrintButton } from './PrintButton'
 import { Solution } from './Solution'
 
 /**
@@ -30,6 +31,7 @@ export const mdxComponents: MDXComponents = {
   Solution,
   Compare,
   CompareItem,
+  PrintButton,
   DistributionExplorer,
   NormalArea,
   DistributionRelations,

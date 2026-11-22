@@ -1,0 +1,223 @@
+/* ==========================================================================
+   Cheat sheet page (#/cheat-sheet): dense typography on screen, and an A4
+   three-column print layout that must fit 4 pages (2 sheets, both sides).
+   Screen rules are scoped to .prose.cheat; print rules to html[data-page].
+   ========================================================================== */
+
+/* ---------- Screen: same look as the chapters, just tighter ---------- */
+.prose.cheat {
+  font-size: 15.5px;
+  line-height: 1.5;
+}
+.prose.cheat h2 {
+  font-size: 22px;
+  margin: 30px 0 4px;
+  padding-bottom: 2px;
+  border-bottom: 2px solid var(--accent-soft);
+}
+.prose.cheat h3 {
+  font-size: 16.5px;
+  margin: 14px 0 2px;
+  color: var(--accent);
+}
+.prose.cheat p {
+  margin: 4px 0;
+}
+.prose.cheat ul,
+.prose.cheat ol {
+  margin: 3px 0;
+  padding-left: 20px;
+}
+.prose.cheat li {
+  margin: 1px 0;
+}
+.prose.cheat table {
+  margin: 6px 0;
+  font-size: 14px;
+  line-height: 1.35;
+}
+.prose.cheat th,
+.prose.cheat td {
+  padding: 2px 6px;
+}
+.prose.cheat [data-callout] {
+  padding: 5px 10px;
+  margin: 6px 0;
+  border-left-width: 4px;
+}
+.prose.cheat [data-callout-title] {
+  font-size: 13px;
+  margin-bottom: 0;
+}
+.prose.cheat .katex-display {
+  margin: 4px 0;
+  padding: 2px 0;
+}
+.prose.cheat hr {
+  border: 0;
+  border-top: 1px dashed var(--border);
+  margin: 6px 0;
+}
+
+/* ---------- Print: A4, 3 columns, ≤ 4 pages ---------- */
+@page cheat {
+  size: A4 portrait;
+  margin: 6mm 6mm 6.5mm;
+}
+
+@media print {
+  html[data-page='cheat-sheet'] {
+    /* always print the light palette, even if the OS is in dark mode */
+    --bg: #fff;
+    --surface: #fff;
+    --surface-2: #f1f2f5;
+    --text: #000;
+    --muted: #444;
+    --border: #b9bcc4;
+    --accent: #2a43b0;
+    --accent-soft: #e6eafa;
+    --def: #2a43b0;
+    --def-soft: #eef1fc;
+    --ex: #1c7a40;
+    --ex-soft: #ebf6ef;
+    --warn: #b84a0a;
+    --warn-soft: #fdf0e6;
+    --tip: #7d2c9b;
+    --tip-soft: #f6ecfa;
+    --cs-size: 8pt;
+    --cs-cols: 2;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  html[data-page='cheat-sheet'] body {
+    page: cheat;
+    background: #fff;
+    color: #000;
+    font-size: var(--cs-size);
+    line-height: 1.2;
+  }
+  html[data-page='cheat-sheet'] [data-noprint] {
+    display: none !important;
+  }
+  /* drop the app shell: no sidebar column, no max widths, no padding */
+  html[data-page='cheat-sheet'] main,
+  html[data-page='cheat-sheet'] main * {
+    max-width: none;
+  }
+  html[data-page='cheat-sheet'] main {
+    padding: 0 !important;
+  }
+  html[data-page='cheat-sheet'] #root > div:has(> main) {
+    display: block;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+  }
+
+  /* one-line title above the columns */
+  html[data-page='cheat-sheet'] [data-chapter-header] {
+    padding: 0 0 0.6mm;
+    margin: 0 0 1mm;
+    border-bottom: 0.8pt solid var(--accent);
+    display: flex;
+    align-items: baseline;
+    gap: 3mm;
+  }
+  html[data-page='cheat-sheet'] [data-chapter-header] > * {
+    margin: 0;
+    font-size: 9pt;
+    line-height: 1.2;
+  }
+  html[data-page='cheat-sheet'] [data-chapter-header] > div {
+    font-size: 7pt;
+  }
+
+  .prose.cheat {
+    column-count: var(--cs-cols);
+    column-gap: 4mm;
+    column-rule: 0.4pt solid #c9ccd3;
+    font-size: var(--cs-size);
+    line-height: 1.2;
+    orphans: 2;
+    widows: 2;
+  }
+  .prose.cheat h2 {
+    font-size: 1.32em;
+    line-height: 1.15;
+    margin: 1.6mm 0 0.6mm;
+    padding: 0.35mm 1.2mm;
+    border: 0;
+    border-radius: 1mm;
+    background: var(--accent);
+    color: #fff;
+    break-after: avoid;
+    break-inside: avoid;
+  }
+  .prose.cheat h2::before {
+    color: #fff;
+    margin-right: 1.5mm;
+  }
+  .prose.cheat h2:first-of-type {
+    margin-top: 0;
+  }
+  .prose.cheat h3 {
+    font-size: 1.1em;
+    line-height: 1.15;
+    margin: 1.1mm 0 0.2mm;
+    color: var(--accent);
+    break-after: avoid;
+  }
+  .prose.cheat p {
+    margin: 0.5mm 0;
+  }
+  .prose.cheat ul,
+  .prose.cheat ol {
+    margin: 0.3mm 0;
+    padding-left: 3.2mm;
+  }
+  .prose.cheat li {
+    margin: 0;
+  }
+  .prose.cheat table {
+    display: table;
+    width: 100%;
+    margin: 0.7mm 0;
+    font-size: 0.95em;
+    line-height: 1.15;
+    break-inside: avoid;
+  }
+  .prose.cheat th,
+  .prose.cheat td {
+    padding: 0.15mm 0.7mm;
+    overflow-wrap: normal;
+    border-color: #c3c6cd;
+  }
+  .prose.cheat [data-callout] {
+    padding: 0.4mm 1.2mm;
+    margin: 0.7mm 0;
+    border-radius: 0.8mm;
+    border-width: 0.4pt;
+    border-left-width: 1.6pt;
+    break-inside: avoid;
+  }
+  .prose.cheat [data-callout-title] {
+    font-size: 1em;
+    margin: 0;
+  }
+  .prose.cheat .katex {
+    font-size: 1.05em;
+  }
+  /* the visually-hidden MathML copy can stick out past the right column and make
+     Chrome shrink the whole page to fit, so drop it from the printout */
+  html[data-page='cheat-sheet'] .katex-mathml {
+    display: none;
+  }
+  .prose.cheat .katex-display {
+    margin: 0.4mm 0;
+    padding: 0;
+    overflow: visible;
+  }
+  .prose.cheat code {
+    padding: 0 0.6mm;
+  }
+}

@@ -15,6 +15,8 @@ export interface Chapter {
   source: string
   /** what the chapter covers, one line */
   blurb: string
+  /** dense layout + A4 print styles (cheat sheet) */
+  dense?: boolean
   /** undefined → not written yet (shown as "เร็วๆ นี้") */
   Content?: LazyExoticComponent<ComponentType<MDXProps>>
 }
@@ -73,6 +75,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'cheat-sheet',
     no: 'C',
     group: 'extra',
+    dense: true,
     title: 'Cheat Sheet',
     subtitle: 'Cheat Sheet',
     source: 'ทุกบท',

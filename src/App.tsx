@@ -17,13 +17,15 @@ export default function App() {
 
   useEffect(() => {
     document.title = `${chapter.subtitle} · สรุปสถิติ CEM II`
+    // lets page-specific CSS (e.g. the cheat sheet's print layout) target this chapter
+    document.documentElement.dataset.page = chapter.id
   }, [chapter])
 
   const { Content } = chapter
   return (
     <AppShell chapter={chapter} headings={headings}>
       <ChapterHeader chapter={chapter} />
-      <article className="prose" ref={contentRef} key={chapter.id}>
+      <article className={chapter.dense ? 'prose cheat' : 'prose'} ref={contentRef} key={chapter.id}>
         {Content ? (
           <Suspense fallback={<p className="small">กำลังโหลด…</p>}>
             <Content components={mdxComponents} />
@@ -33,7 +35,7 @@ export default function App() {
           <ComingSoon chapter={chapter} />
         )}
       </article>
-      <footer className="small" style={{ marginTop: 60, paddingTop: 16, borderTop: '1px solid var(--border)' }}>
+      <footer data-noprint className="small" style={{ marginTop: 60, paddingTop: 16, borderTop: '1px solid var(--border)' }}>
         {chapter.group === 'extra' ? 'รวมจากทุกบท' : `สรุปจากสไลด์ ${chapter.source}`} · 2110203 COMP ENG MATH II
       </footer>
     </AppShell>
